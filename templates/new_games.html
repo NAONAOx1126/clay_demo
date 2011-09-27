@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="-1" />
+<meta name="description" content="ﾓｴｹﾞｰ" />
+<meta name="keywords" content="ﾓｴｹﾞｰ" />
+<meta name="robots" content="index,follow" />
+<!-- モジュール呼び出し用のメタタグ -->
+<meta name="loadmodule" content="Shopping.Product.New" item="10" category="1" result="new_products" />
+<!--{assign var="shopping_type" value=$smarty.server.CONFIGURE.SITE.shopping_type}-->
+<title>ﾁｮｯﾄHな萌ﾌﾗｯｼｭｹﾞｰﾑ続々登場! ﾓｴｹﾞｰ</title>
+<style type="text/css">
+	<![CDATA[
+			a:link{color:#00c9e1;}
+			a:focus{color:#FFF;}
+			a:visited{color:#00c9e1;}
+	]]>
+</style>
+</head>
+<body>
+
+<!--WRAP-->
+<div style="font-size:xx-small;">
+
+<!--HEADER-->
+<h1 style="font-size:xx-small;font-weight:normal;color:#FFF;background:#00c9e1;text-align:center;margin:0;">
+<a id="top" name="top">ﾁｮｯﾄHな萌ﾌﾗｯｼｭｹﾞｰﾑ続々登場!</a>
+</h1>
+<div style="background:#ebfdff;"><a href="index.html">ﾓｴｹﾞｰ</a> &gt; ﾁｮｯﾄHな萌ﾌﾗｯｼｭｹﾞｰﾑ続々登場!</div>
+<!--HEADER END-->
+
+<!--CONTENT-->
+<!--{foreach from=$ATTRIBUTES.new_products.data key="index" item="product"}-->
+<div style="<!--{if $index % 2 == 1}-->background:#ffe5f0;<!--{/if}-->padding:5px 0;">
+<img src="<!--{$product->image($shopping_type)->list_image|default:"img/item_dummy01.jpg"}-->" width="55" height="70" style="float:left;margin-right:5px;" />
+<!--{emoji code="120"}--><a href="game.html?product_id=<!--{$product->product_id}-->" style="color:#ff6393;"><!--{$product->product_name|escape}--></a><br />
+<!--{$product->list_comment|escape|nl2br}--><br style="clear:left;" />
+</div>
+<!--{/foreach}-->
+
+<div style="background:#e8e8e8;margin:5px 0;">
+<img src="img/sp.gif" width="1" height="1" />
+</div>
+
+<div style="color:#e8e8e8;text-align:center;">
+<!--{if $ATTRIBUTES.new_products.links_object.back != ""}-->
+<!--{$ATTRIBUTES.new_products.links_object.first}--><!--{$ATTRIBUTES.new_products.links_object.back}-->[*] 
+<!--{/if}-->
+<!--{$ATTRIBUTES.new_products.links_object.pages}-->
+<!--{if $ATTRIBUTES.new_products.links_object.next != ""}-->
+[#]<!--{$ATTRIBUTES.new_products.links_object.next}--><!--{$ATTRIBUTES.new_products.links_object.last}-->
+<!--{/if}-->
+</div>
+
+<!--CONTENT END-->
+
+<!--FOOTERｰ-->
+<!--{include file="common/footer.html"}-->
+<!--FOOTER END-->
+
+</div>
+<!--WRAP END-->
+</body>
+</html>

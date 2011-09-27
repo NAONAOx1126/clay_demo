@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="-1" />
+<meta name="description" content="ﾓｴｹﾞｰ" />
+<meta name="keywords" content="ﾓｴｹﾞｰ" />
+<meta name="robots" content="index,follow" />
+<!-- モジュール呼び出し用のメタタグ -->
+<meta name="loadmodule" content="Member.Agreement" error="agreement.html" />
+<meta name="loadmodule" content="Member.MobileAutoLogin" auto="1" />
+<meta name="*loadmodule" content="Shopping.Product.New" item="7" category="1" result="new_games" />
+<meta name="*loadmodule" content="Shopping.Product.List" item="5" category="1" result="cool_games" />
+<meta name="*loadmodule" content="Shopping.Product.List" item="5" category="2" result="cool_images" />
+<meta name="*loadmodule" content="Shopping.Product.List" item="5" category="3" category2="" result="cool_voices" />
+<meta name="*loadmodule" content="Shopping.Category.Page" item="20" type="2" result="characters" />
+<meta name="*loadmodule" content="Shopping.Category.Page" item="20" type="3" result="keywords" />
+<!--{assign var="shopping_type" value=$smarty.server.CONFIGURE.SITE.shopping_type}-->
+<title>モエゲー</title>
+<style type="text/css">
+	<![CDATA[
+			a:link{color:#00c9e1;}
+			a:focus{color:#FFF;}
+			a:visited{color:#00c9e1;}
+	]]>
+</style>
+</head>
+<body>
+<!--{if $isVGA == "1"}-->
+<font size="3">
+<!--{else}-->
+<font size="1">
+<!--{/if}-->
+
+<!--WRAP-->
+<div style="font-size: x-small">
+
+<!--HEADER-->
+<table border="0" bgcolor="#00c9e1" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+	<tr>
+		<td align="center">
+			<font COLOR="#ffffff"><a id="top" name="top">★美少女ゲーム配信★</a></font>
+		</td>
+	</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+	<tr><td><img src="img/h_top01.gif" /></td></tr>
+</table>
+<!--HEADER END-->
+
+<!--Marquee-->
+<table border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+	<tr><td><marquee><font color="#ff6393" size="1">総合萌アニメゲームサイト★毎日更新中★ボイスは毎日更新!!</font></marquee></td></tr>
+</table>
+<!--Marquee END-->
+
+<!--ｻｲﾄ説明-->
+<table bgcolor="#ebfdff" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+	<tr><td style="background:#ebfdff;padding:5px 0;"><font size="1">Hな萌ﾌﾗｯｼｭ、ｴﾛﾌﾗ、ぷるぷる美少女、ｴﾛﾎﾞｲｽ、あえぎ声、たくさんﾀﾞｳﾝﾛｰﾄﾞできるよ!</font></td></tr>
+</table>
+<!--ｻｲﾄ説明END-->
+
+<!--ﾅﾋﾞｹﾞｰｼｮﾝ-->
+<table bgcolor="#ebfdff" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%">
+	<tr><td align="center" style="background:#ebfdff;padding:5px 0;"><font size="1">
+		<!--{emoji code="140"}--><a href="entry/index.html">会員登録</a> 
+        <!--{emoji code="125"}--><a href="new_games.html" accesskey="1">新着</a> 
+		<!--{emoji code="126"}--><a href="#search" accesskey="2">検索</a> 
+		<!--        <!--{emoji code="127"}--><a href="ranking_games.html" accesskey="3">ﾗﾝｷﾝｸﾞ</a> -->
+    </font><br><!--<img src="img/sp.gif" width="1" height="1">--></td></tr>
+</table>
+<!--ﾅﾋﾞｹﾞｰｼｮﾝEND-->
+
+<!--ﾌﾟﾚｾﾞﾝﾄ-->
+<div style="color:#FFF;background:#ff6393;">
+<table bgcolor="#ff6393" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<td width="110">
+			<img src="img/h_top02.gif" style="float:left;margin-right:5px;" />
+		</td>
+		<td>
+			<img src="img/sp.gif" width="1" height="2" /><br />
+            <font size="1" color="#ffffff">500円以上のｺｰｽでﾎﾞｰﾅｽﾌﾟﾚｾﾞﾝﾄ!</font><br style="clear:left;" />
+		</td>
+	</tr>
+</table>
+</div>
+<!--ﾌﾟﾚｾﾞﾝﾄEND-->
+
+<!--新着ｹﾞｰﾑ-->
+<div>
+<img src="img/h_top03.gif" />
+</div>
+
+<!--{foreach from=$ATTRIBUTES.new_games.data key="index" item="product"}-->
+<table border="0" cellspacing="0" cellpadding="0" width="100%" <!--{if $index % 2 == 0}-->bgcolor="#ffe5f0"<!--{/if}--> style="<!--{if $index % 2 == 0}-->background:#ffe5f0;<!--{/if}-->padding:5px 0;">
+	<tr>
+		<td width="55" height="75" valign="top">
+			<img src="<!--{$product->image($shopping_type)->list_image|default:"img/item_dummy01.jpg"}-->" width="55" height="70" style="float:left;margin-right:5px;" />
+		</td>
+		<td valign="top">
+			<font size="1">
+			<!--{emoji code="120"}--><a href="game.html?product_id=<!--{$product->product_id}-->" style="color:#ff6393;"><!--{$product->product_name|escape}--></a><br />
+			<!--{$product->list_comment|escape|nl2br}--><br style="clear:left;" />
+			</font>
+		</td>
+	</tr>
+</table>
+<!--{/foreach}-->
+<img src="img/sp.gif" width="1" height="1" VSPACE="0" align="center">
+<table border="0" cellspacing="0" cellpadding="0" width="100%"
+	<tr><td align="right"><font size="1"><a href="new_games.html">Hな萌ﾌﾗｯｼｭ一覧へ</a></font></td></tr>
+</table>
+<!--新着ｹﾞｰﾑEND-->
+
+<!--ｵｽｽﾒ!ｴﾛﾎﾞｲｽ-->
+<!--
+<div style="font-size:medium;color:#FFF;background:#00c9e1;">
+<table bgcolor="#00c9e1" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td><font size="1"><!--{emoji code="146"}--></font><font color="#ffffff" size="1">ｵｽｽﾒ!ｴﾛﾎﾞｲｽ</font></td></tr>
+</table>
+</div>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!--{foreach from=$ATTRIBUTES.cool_voices.data key="index" item="product"}-->
+	<tr <!--{if $index % 2 == 0}-->bgcolor="#ebfdff"<!--{/if}-->>
+		<td>
+			<div style="<!--{if $index % 2 == 0}-->background:#ebfdff;<!--{/if}-->padding:5px 0;">
+			<img src="<!--{$product->image($shopping_type)->list_image|default:"img/icon_dummy01.jpg"}-->" width="20" height="20" style="float:left;margin-right:5px;" />
+			</div>
+		<td>
+		<td>
+			<a href="voice.html?product_id=<!--{$product->product_id}-->"><!--{$product->product_name|escape}--></a><br style="clear:left;" />
+		</td>
+	</tr>
+<!--{/foreach}-->
+</table>
+<img src="img/sp.gif" width="1" height="1" VSPACE="0" />
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td align="right"><div style="text-align:right;margin:5px 0;"><font size="1"><a href="ranking_voices.html">ｴﾛﾎﾞｲｽ一覧へ</a></font></div></td></tr>
+</table>
+-->
+<!--ｵｽｽﾒ!ｴﾛﾎﾞｲｽEND-->
+
+<!--ｵｽｽﾒｻｲﾄ-->
+<!--
+<div style="font-size:medium;color:#FFF;background:#ff6393;">
+<table bgcolor="#ff6393" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td><font color="#ffffff" size="1">厳選ｵｽｽﾒｴﾛｱﾆﾒｻｲﾄ!</font></td></tr>
+</table>
+</div>
+
+<div style="text-align:center;margin:5px 0;">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td width="100%" align="center">
+		<a href="#"><img src="img/bnr_dummy.gif" width="111" height="41" border="0" /></a><img src="img/sp.gif" width="3" height="1" vspace="0" align="center" /><a href="#"><img src="img/bnr_dummy.gif" width="111" height="41" border="0" /></a>
+	</td></tr>
+</table>
+</div>
+-->
+<!--ｵｽｽﾒｻｲﾄ-->
+
+<!--美少女ｹﾞｰﾑ-->
+<div style="font-size:medium;color:#FFF;background:#00c9e1;">
+<table bgcolor="#00c9e1" border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td>
+<font size="1"><!--{emoji code="137"}--></font><font color="#ffffff" size="1">美少女ｹﾞｰﾑ</font>
+</td></tr></table>
+</div>
+
+<!--{foreach from=$ATTRIBUTES.cool_games.data key="index" item="product"}-->
+<table border="0" cellspacing="0" cellpadding="0" width="100%" <!--{if $index % 2 == 0}-->bgcolor="#ebfdff"<!--{/if}-->  style="<!--{if $index % 2 == 0}-->background:#ebfdff;<!--{/if}-->padding:5px 0;">
+	<tr>
+		<td width="55" height="75" valign="top">
+			<img src="<!--{$product->image($shopping_type)->list_image|default:"img/item_dummy01.jpg"}-->" width="55" height="70" style="float:left;margin-right:5px;" />
+		</td>
+		<td valign="top">
+			<font size="1">
+				<!--{emoji code="120"}--><a href="game.html?product_id=<!--{$product->product_id}-->"><!--{$product->product_name|escape}--></a><br />
+				<!--{$product->list_comment|escape|nl2br}--><br style="clear:left;" />
+			</font>
+		</td>
+	</tr>
+</table>
+<!--{/foreach}-->
+
+<img src="img/sp.gif" width="1" height="1" VSPACE="0" align="center">
+<div style="text-align:right;margin:5px 0;">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td align="right"><font size="1"><a href="game_list.html">萌ｹﾞｰﾑ一覧へ</a></font></td></tr>
+</table>
+</div>
+<!--美少女ｹﾞｰﾑEND-->
+
+
+<!--美少女待ち受け萌画像-->
+<div style="font-size:medium;color:#FFF;background:#00c9e1;">
+<table bgcolor="#00c9e1" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td><font size="1"><!--{emoji code="137"}--></font><font color="#ffffff" size="1">美少女待ち受け萌画像</font></td></tr>
+</table>
+</div>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!--{foreach from=$ATTRIBUTES.cool_images.data key="index" item="product"}-->
+	<tr <!--{if $index % 2 == 0}-->bgcolor="#ebfdff"<!--{/if}-->>
+		<td width="55" height="75" valign="top">
+			<div style="<!--{if $index % 2 == 0}-->background:#ebfdff;<!--{/if}-->padding:5px 0;">
+			<img src="<!--{$product->image($shopping_type)->list_image|default:"img/item_dummy01.jpg"}-->" width="55" height="70" style="float:left;margin-right:5px;" />
+			</div>
+		</td>
+		<td valign="top"><font size="1">
+			<!--{emoji code="120"}--><a href="image.html?product_id=<!--{$product->product_id}-->"><!--{$product->product_name|escape}--></a><br />
+			<!--{$product->list_comment|escape|nl2br}--><br style="clear:left;" />
+		</font></td>
+	</tr>
+<!--{/foreach}-->
+</table>
+
+<img src="img/sp.gif" width="1" height="1" VSPACE="0" align="center">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td align="right"><div style="text-align:right;margin:5px 0;"><font size="1"><a href="image_list.html">待ち受け萌画像一覧へ</a></font></div></td></tr>
+</table>
+<!--美少女待ち受け萌画像END-->
+
+<!--萌着ﾎﾞｲｽ-->
+<div style="font-size:medium;color:#FFF;background:#00c9e1;margin-bottom:5px;">
+<table bgcolor="#00c9e1" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td><font size="1"><!--{emoji code="57"}--></font><font color="#ffffff" size="1">萌着ﾎﾞｲｽ</font></td></tr>
+</table>
+</div>
+
+<div>
+<!--{foreach from=$ATTRIBUTES.cool_voices.data key="index" item="product"}-->
+<a href="voice.html?product_id=<!--{$product->product_id}-->" style="<!--{if $index % 4 == 0}-->color:#ff6393;<!--{/if}--><!--{if $index % 4 == 1}-->color:#ffae00;<!--{/if}--><!--{if $index % 4 == 3}-->color:#6e3aa4;<!--{/if}-->"><!--{$product->product_name|escape}--></a>&nbsp;
+<!--{/foreach}-->
+</div>
+
+<div style="background:#e8e8e8;margin-top:5px;">
+<img src="img/sp.gif" width="1" height="1" VSPACE="0">
+</div>
+
+<img src="img/sp.gif" width="1" height="1" VSPACE="0" align="center">
+<div style="text-align:right;margin:5px 0;">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td align="right"><font size="1"><a href="voice_list.html">ｴﾛﾎﾞｲｽ一覧へ</a></font></td></tr>
+</table>
+</div>
+<!--ﾎﾞｲｽEND-->
+
+<!--検索-->
+<div style="font-size:medium;color:#FFF;background:#6e3aa4;">
+<table bgcolor="#6e3aa4" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td><font color="#ffffff" size="1"><!--{emoji code="119"}--></font><a id="search" name="search"><font color="#ffffff" size="1">検索</font></a></td></tr>
+</table>
+</div>
+
+<div style="background:#eadef7;margin-bottom:5px;">
+<table bgcolor="#eadef7" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td><font size="1">ｷｬﾗｸﾀｰで探す</font></td></tr>
+</table>
+</div>
+
+<!--{foreach from=$ATTRIBUTES.characters.data key="index" item="category"}-->
+<div style="float:left;width:120px;" align="left">
+	<!-- <img src="<!--{$category->category_image|default:"img/icon_dummy01.jpg"}-->" /> -->
+	◆<font size="1" width="120"><a href="character.html?category2=<!--{$category->category_id}-->"><!--{$category->category_name|mb_truncate:"7"}--></a></font>
+</div>
+<!--{/foreach}-->
+
+<div style="background:#e8e8e8;clear:left;margin-top:5px;">
+<table bgcolor="#e8e8e8" border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td><img src="img/sp.gif" width="1" height="1" VSPACE="0" align="center"></td></tr>
+</table>
+</div>
+
+<div style="text-align:right;margin:5px 0;">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td align="right"><font size="1"><a href="character_list.html">美少女ｷｬﾗｸﾀｰ一覧へ</a></font></td></tr>
+</table>
+</div>
+
+<div style="background:#eadef7;margin-bottom:5px;">
+<table bgcolor="#eadef7" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td><font size="1">ｷｰﾜｰﾄﾞで探す</font></td></tr>
+</table>
+</div>
+
+<div style="color:#ebebeb;">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td>
+<!--{foreach from=$ATTRIBUTES.keywords.data key="index" item="category"}-->
+<font color="#ebebeb" size="1">
+<!--{if $index > 0}-->|<!--{/if}--><a href="keyword.html?category3=<!--{$category->category_id}-->"><!--{$category->category_name}--></a>
+</font>
+<!--{/foreach}-->
+</td></tr>
+</table>
+</div>
+
+<div style="background:#e8e8e8;clear:left;margin-top:5px;">
+<table bgcolor="#e8e8e8" border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr><td><img src="img/sp.gif" width="1" height="1" VSPACE="0"></td></tr>
+</table>
+</div>
+<div style="text-align:right;margin:5px 0;">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td align="right"><font size="1"><a href="keyword_list.html">萌ｷｰﾜｰﾄﾞ一覧へ</a></font></td></tr>
+</table>
+</div>
+<!--検索END-->
+
+<!--ﾕｰｻﾞｰﾒﾆｭｰ-->
+<div style="font-size:medium;color:#FFF;background:#ffae00;margin-bottom:5px;">
+<table bgcolor="#ffae00" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr><td><font color="#ffffff" size="1"><!--{emoji code="70"}--></font><font color="#ffffff" size="1">ﾕｰｻﾞｰﾒﾆｭｰ</font></td></tr>
+</table>
+</div>
+
+<img src="img/sp.gif" width="1" height="1" VSPACE="0" align="center">
+<div>
+<a href="mypage/index.html">ﾏｲﾍﾟｰｼﾞ</a><br />
+<a href="entry/index.html">会員登録・退会</a><br />
+<a href="about/faq.html">よくある質問</a><br />
+<a href="inquiry/index.html">お問い合わせ</a><br />
+<a href="about/point.html">ﾎﾟｲﾝﾄについて</a><br />
+<a href="about/terms.html">利用規約</a><br />
+<a href="about/tokuteisho.html">特定商取引法に基づく表記</a><br />
+<a href="about/privacy.html">ﾌﾟﾗｲﾊﾞｼｰﾎﾟﾘｼｰ</a><br />
+<a href="#">通信量の目安</a><br />
+<a href="about/company.html">運営会社</a>
+</div>
+<img src="img/sp.gif" width="1" height="1" VSPACE="0" align="center">
+<!--ﾕｰｻﾞｰﾒﾆｭENDｰ-->
+
+<!--FOOTERｰ-->
+<!--{include file="common/footer.html"}-->
+<!--FOOTER END-->
+
+</div>
+<!--WRAP END-->
+</font></body>
+</html>
+

@@ -1,0 +1,130 @@
+@charset "utf-8";
+
+/*
+------------------------------------------
+
+CSS Document モエゲーヘッダー
+
+------------------------------------------
+*/
+
+#wrap #header h1 {
+	float: left;
+	width: 248px;
+	height: 36px;
+	background: url(../images/common/main_rogo.gif) no-repeat left top;
+	text-indent: -9999px;
+}
+
+
+
+/* 
+	LEVEL ONE
+*/
+ul.dropdown {
+	position: relative;
+	float: left;
+	width: 572px;
+	margin-right: 5px;
+	background-image: url(../images/common/dropmenu2.gif);
+	background-repeat: no-repeat;
+	font-size: 12px;
+}
+ul.dropdown li {
+	float: left;
+	width: 114px;
+	height: 36px;
+	zoom: 1;
+}
+ul.dropdown li a {
+	text-align: center;
+	display: block;
+	width: 100%;
+	height: 28px;
+	background-image: url(../images/common/dropmenu2.gif);
+	background-repeat: no-repeat;
+	color: #FFF;
+	text-decoration: none;
+	padding-top: 8px;
+}
+ul.dropdown a:hover {
+	color: #000;
+}
+ul.dropdown a:active {
+	color: #ffa500;
+}
+
+ul.dropdown li.li01 a {background-position: 0 0;}
+ul.dropdown li.li02 a {background-position: -114px 0;}
+ul.dropdown li.li03 a {background-position: -228px 0;}
+ul.dropdown li.li04 a {background-position: -342px 0;}
+ul.dropdown li.li05 a {background-position: -456px 0;}
+ul.dropdown li.hover,
+ul.dropdown li:hover {
+	position: relative;
+}
+ul.dropdown li a:hover {
+	color: #fff;
+}
+ul.dropdown li.li01 a:hover {background-position: 0 -36px;}
+ul.dropdown li.li02 a:hover {background-position: -114px -36px;}
+ul.dropdown li.li03 a:hover {background-position: -228px -36px;}
+ul.dropdown li.li04 a:hover {background-position: -342px -36px;}
+ul.dropdown li.li05 a:hover {background-position: -456px -36px;}
+
+
+/* 
+	LEVEL TWO
+*/
+ul.dropdown ul {
+	width: 114px;
+	visibility: hidden;
+	position: absolute;
+	top: 100%;
+	left: 1px;
+}
+ul.dropdown ul li {
+	height: 24px;
+	border-bottom:1px solid #caf6fb;
+	font-weight: normal;
+	color: #00bbd1;
+	float: none;
+	background-color: #FFF;
+	filter:alpha(opacity=85);
+	-moz-opacity:0.85;
+	opacity:0.85;
+	
+}
+
+ul.dropdown li li a {
+	text-align: left;
+	color: #00bcd2;
+	padding-top: 0;
+	height: 24px;
+}
+									  
+/* IE 6 & 7 Needs Inline Block */
+ul.dropdown ul li a:link, ul.dropdown ul li a:visited {
+	padding-left: 5px;
+	background-image: none;
+	border-right: none;
+	width: 109px;
+	display: inline-block;
+	text-indent: 0px;
+	text-decoration: none;
+	line-height: 24px;
+} 
+ul.dropdown ul li a:hover {
+	background-color: #00c4db;
+}
+/* 
+	LEVEL THREE
+*/
+ul.dropdown ul ul 					{ left: 100%; top: 0; }
+ul.dropdown li:hover > ul 			{ visibility: visible; }
+
+#header input {
+	float:right;
+	margin-top: 7px;
+	width: 73px;
+}

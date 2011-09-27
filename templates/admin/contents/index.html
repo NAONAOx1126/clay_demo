@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Shopping.Admin.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Shopping.Admin.Product.List" />
+<link rel="stylesheet" type="text/css" href="../css/import.css" media="all" />
+<script type="text/javascript" language="javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.dropdownPlain.js"></script>
+<title>モエゲー作品一覧｜モエゲー管理画面</title>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; モエゲー作品一覧</p>
+		<h2>モエゲー作品一覧</h2>
+		<!--{foreach from=$ERRORS item="error"}-->
+		<div><!--{$error|escape}--></div>
+		<!--{/foreach}-->
+		<div class="inner pdt15 clearfix">
+			<p class="add"><a href="title.html">新規作品登録</a></p>
+			<form action="index.html" method="GET">
+			<table class="type03" summary="サーチ">
+				<tr>
+					<th>作品名</th><td><input type="text" name="name" id="search_name" value="<!--{$ATTRIBUTES.SELECTED_NAME}-->" /></td>
+					<th>商品数</th><td><input type="text" name="count_low" id="search_count_low" class="short" value="<!--{$ATTRIBUTES.SELECTED_COUNT_LOW}-->" /> ～ <input type="text" name="count_high" id="search_count_high" class="short" value="<!--{$ATTRIBUTES.SELECTED_COUNT_HIGH}-->" /></td>
+				</tr>
+				<tr>
+					<th>表示コントロール</th><td colspan="3">
+					<!--{foreach from=$ATTRIBUTES.types item="type"}-->
+					<!--{assign var="type_id" value=$type.type_id}-->
+					<input type="checkbox" name="displays[<!--{$type.type_id}-->]" id="search_displays_<!--{$type.type_id}-->"<!--{if $ATTRIBUTES.SELECTED_DISPLAYS[$type_id] != ""}--> checked<!--{/if}--> />
+					<!--{$type.type_name|escape}-->　
+					<!--{/foreach}-->
+					</td>
+				</tr>
+				<tr>
+					<th>販売会社名</th><td><input type="text" name="seller" id="search_seller" value="<!--{$ATTRIBUTES.SELECTED_SELLER}-->" /></td>
+					<th>メーカー名</th><td><input type="text" name="developer" id="search_developer" value="<!--{$ATTRIBUTES.SELECTED_DEVELOPER}-->" /></td>
+				</tr>
+				<tr>
+					<th>登録日</th>
+					<td colspan="3">
+						<select name="create_time[start][year]">
+						<option value="">----</option>
+						<!--{section name=cnt start=2010 loop=2020}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_CREATE_TIME.start.year == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 年
+						<select name="create_time[start][month]">
+						<option value="">--</option>
+						<!--{section name=cnt start=1 loop=13}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_CREATE_TIME.start.month == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 月
+						<select name="create_time[start][day]">
+						<option value="">--</option>
+						<!--{section name=cnt start=1 loop=32}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_CREATE_TIME.start.day == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 日 ～　
+						<select name="create_time[end][year]">
+						<option value="">----</option>
+						<!--{section name=cnt start=2010 loop=2020}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_CREATE_TIME.end.year == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 年
+						<select name="create_time[end][month]">
+						<option value="">--</option>
+						<!--{section name=cnt start=1 loop=13}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_CREATE_TIME.end.month == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 月
+						<select name="create_time[end][day]">
+						<option value="">--</option>
+						<!--{section name=cnt start=1 loop=32}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_CREATE_TIME.end.day == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 日 
+					</td>
+				</tr>
+				<tr>
+					<th class="end">更新日</th>
+					<td colspan="3">
+						<select name="update_time[start][year]">
+						<option value="">----</option>
+						<!--{section name=cnt start=2010 loop=2020}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_UPDATE_TIME.start.year == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 年
+						<select name="update_time[start][month]">
+						<option value="">--</option>
+						<!--{section name=cnt start=1 loop=13}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_UPDATE_TIME.start.month == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 月
+						<select name="update_time[start][day]">
+						<option value="">--</option>
+						<!--{section name=cnt start=1 loop=32}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_UPDATE_TIME.start.day == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 日 ～　
+						<select name="update_time[end][year]">
+						<option value="">----</option>
+						<!--{section name=cnt start=2010 loop=2020}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_UPDATE_TIME.end.year == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 年
+						<select name="update_time[end][month]">
+						<option value="">--</option>
+						<!--{section name=cnt start=1 loop=13}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_UPDATE_TIME.end.month == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 月
+						<select name="update_time[end][day]">
+						<option value="">--</option>
+						<!--{section name=cnt start=1 loop=32}-->
+						<option value="<!--{$smarty.section.cnt.index}-->"<!--{if $ATTRIBUTES.SELECTED_UPDATE_TIME.end.day == $smarty.section.cnt.index}--> selected<!--{/if}-->><!--{$smarty.section.cnt.index}--></option>
+						<!--{/section}-->
+						</select> 日 
+					</td>
+				</tr>
+			</table>
+			<p class="aln_c"><input type="submit" name="" id="" value="上記の条件で検索する" class="mgb30" /></p>
+			</form>
+			
+			<div class="pagelink clearfix">
+			<!--{if $ATTRIBUTES.products.links_object.pages != ""}-->
+			<ul>
+				<!--{if $ATTRIBUTES.products.links_object.back != ""}-->
+				<li><!--{$ATTRIBUTES.products.links_object.back}--></li>
+				<!--{/if}-->
+				<li><!--{$ATTRIBUTES.products.links_object.pages}--></li>
+				<!--{if $ATTRIBUTES.products.links_object.next != ""}-->
+				<li><!--{$ATTRIBUTES.products.links_object.next}--></li>
+				<!--{/if}-->
+			</ul>
+			<!--{/if}-->
+			<p class="total">トータル　<!--{$ATTRIBUTES.products.totalItems|number_format}-->件</p>
+			</div>
+			<table class="type02" summary="一覧">
+				<tr>
+					   <th class="w4">詳細</th>
+					<th class="w7">並び順<br /><a href="index.html?order=">▲</a></th>
+					<th class="w7">ID<br /><a href="index.html?order=id">▲</a> <a href="index.html?order=rid">▼</a></th>
+					<th class="w7">アイコン</th>
+					<th class="w20">作品<br /><a href="index.html?order=name">▲</a> <a href="index.html?order=rname">▼</a></th>
+					<th class="w4">利用料</th>
+					<th class="w4">商品数</th>
+					<th class="w4">docomo</th>
+					<th class="w4">au</th>
+					<th class="w4">sb</th>
+					<th class="w4">勝手</th>
+					<th class="w10">販売会社名<br /><a href="index.html?order=sell">▲</a> <a href="index.html?order=rsell">▼</a></th>
+					<th class="w10">メーカー名<br /><a href="index.html?order=dev">▲</a> <a href="index.html?order=rdev">▼</a></th>
+					<th class="w9">登録日<br /><a href="index.html?order=create">▲</a> <a href="index.html?order=rcreate">▼</a></th>
+					<th class="w9 end">更新日<br /><a href="index.html?order=update">▲</a> <a href="index.html?order=rupdate">▼</a></th>
+				</tr>
+				<!--{foreach from=$ATTRIBUTES.products.data key="index" item="product"}-->
+				<tr>
+					<td class="aln_c"><input type="button" name="detail" id="detail_<!--{$product.product_id}-->" value="詳細" onclick="location.href='title.html?id=<!--{$product.product_id}-->'" /></td>
+					<td class="aln_r"><!--{$product.sort_order}--></td>
+					<td class="aln_r"><!--{$product.product_id}--></td>
+					<td class="aln_r"><img src="<!--{$product["list_image_勝手"]|default:"/img/item_dummy01.jpg"}-->" alt="アイコン" /></td>
+					<td><!--{$product.product_name|escape}--></td>
+					<td class="aln_r"><!--{$product.profit_rate}-->％</td>
+					<td class="aln_r"><!--{$product.children|number_format}--></td>
+					<td class="aln_c"><!--{if $product["docomo"] != ""}-->○<!--{else}-->×<!--{/if}--></td>
+					<td class="aln_c"><!--{if $product["au"] != ""}-->○<!--{else}-->×<!--{/if}--></td>
+					<td class="aln_c"><!--{if $product["sb"] != ""}-->○<!--{else}-->×<!--{/if}--></td>
+					<td class="aln_c"><!--{if $product["勝手"] != ""}-->○<!--{else}-->×<!--{/if}--></td>
+					<td><!--{$product.seller_name|escape}--></td>
+					<td><!--{$product.developer_name|escape}--></td>
+					<td class="aln_r"><!--{$product.create_time|date_format:"%y/%m/%d"}--></td>
+					<td class="aln_r"><!--{$product.update_time|date_format:"%y/%m/%d"}--></td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+			
+			<div class="pagelink clearfix">
+			<!--{if $ATTRIBUTES.products.links_object.pages != ""}-->
+			<ul>
+				<!--{if $ATTRIBUTES.products.links_object.back != ""}-->
+				<li><!--{$ATTRIBUTES.products.links_object.back}--></li>
+				<!--{/if}-->
+				<li><!--{$ATTRIBUTES.products.links_object.pages}--></li>
+				<!--{if $ATTRIBUTES.products.links_object.next != ""}-->
+				<li><!--{$ATTRIBUTES.products.links_object.next}--></li>
+				<!--{/if}-->
+			</ul>
+			<!--{/if}-->
+			<p class="total">トータル　<!--{$ATTRIBUTES.products.totalItems|number_format}-->件</p>
+			</div>
+		</div>
+	</div>
+	<address class="cl">Copyright &copy;2010 menue All Rights Reserved.</address>
+</div>
+</body>
+</html>
