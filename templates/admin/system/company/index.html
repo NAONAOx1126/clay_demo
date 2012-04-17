@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Base.Site.List" />
+<link rel="stylesheet" type="text/css" href="../../css/import.css" media="all" />
+<script type="text/javascript" language="javascript" src="../../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="../../js/jquery.dropdownPlain.js"></script>
+<title>会社一覧｜システムメンテ｜モエゲー管理画面</title>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu">
+			<a href="/admin/index.html">メインメニュー</a>
+			&gt; <a href="/admin/system/site/index.html">システムメンテ</a>
+			&gt; サイト
+		</p>
+		<h2>サイト一覧</h2>
+		<!--{foreach from=$ERRORS item="error"}-->
+		<div><!--{$error|escape}--></div>
+		<!--{/foreach}-->
+		
+	    <div class="inner pdt15 clearfix">
+	    	<p class="add"><a href="edit.html">新規サイト登録</a></p>
+	    	<form action="index.html" method="POST">
+	        <table class="type03" summary="サーチ">
+	            <tr>
+	            	<th>サイトコード</th>
+	            	<td><input type="text" name="site_code" id="search_site_code" class="middle" /></td>
+	            	<th>サイト名</th>
+	            	<td><input type="text" name="site_name" id="search_site_name" class="middle" /></td>
+	            </tr>
+	        </table>
+	        
+            <p class="aln_c"><input type="submit" name="search" id="search" value="上記の条件で検索する" class="mgb30" /></p>
+            </form>
+            
+            <table class="type02" summary="一覧">
+            	<tr>
+                	<th class="w7">サイトID</th>
+                	<th class="w10">サイトコード</th>
+                	<th class="w10">サイトパスワード</th>
+                	<th class="w11">サイト名</th>
+                	<th class="w10">ドメイン</th>
+                	<th class="w30">サイトホーム</th>
+                	<th class="w9">登録日</th>
+                	<th class="w9">更新日</th>
+               		<th class="w4">&nbsp;</th>
+               		<th class="w4">&nbsp;</th>
+            	</tr>
+				<!--{foreach from=$ATTRIBUTES.sites key="index" item="site"}-->
+				<tr>
+				<td id="site_id_<!--{$index}-->" class="aln_r"><!--{$site->site_id}--></td>
+				<td id="site_code_<!--{$index}-->" class="aln_c"><!--{$site->site_code}--></td>
+				<td id="site_password_<!--{$index}-->" class="aln_c"><!--{$site->site_password}--></td>
+				<td id="site_name_<!--{$index}-->" class="aln_c"><!--{$site->site_name}--></td>
+				<td id="domain_name_<!--{$index}-->" class="aln_c"><!--{$site->domain_name}--></td>
+				<td id="site_home_<!--{$index}-->" class="aln_c"><!--{$site->site_home}--></td>
+				<td id="create_time_<!--{$index}-->" class="aln_r"><!--{$site->create_time}--></td>
+				<td id="update_time_<!--{$index}-->" class="aln_r"><!--{$site->update_time}--></td>
+				<td id="edit_<!--{$index}-->" class="edit"><a href="edit.html?site_id=<!--{$site->site_id}-->">編集</a></td>
+				<td id="delete_<!--{$index}-->" class="delete"><a href="delete.html?site_id=<!--{$site->site_id}-->" onclick="return confirm('削除します。よろしいですか？')">削除</a></td>
+				</tr>
+				<!--{/foreach}-->
+            </table>
+        </div>
+	</div>
+	<address class="cl">Copyright &copy;2010 menue All Rights Reserved.</address>
+</div>
+
+</body>
+</html>

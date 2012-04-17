@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Base.Pref.List" />
+<meta name="loadmodule" content="Member.Customer.Detail" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="function_name" value="顧客"}-->
+<title><!--{$function_name}-->｜顧客｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<script type="text/javascript">
+$(function(){
+	$("#sale_start").AnyTime_picker({ format: "%Y-%m-%d %H:%i" } );
+	$("#sale_end").AnyTime_picker({ format: "%Y-%m-%d %H:%i" } );
+});
+</script>
+</head>
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/customer/index.html">顧客</a> &gt; <a href="/admin/customer/customer/index.html">顧客一覧</a> &gt; <!--{$function_name}--></p>
+		<h2><!--{$function_name}-->｜顧客｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</h2>
+		<div class="inner pdt15 clearfix">
+			<form action="confirm.html" method="POST" enctype="multipart/form-data">
+			<h3>顧客基本情報</h3>
+			<input type="hidden" name="customer_id" value="<!--{$smarty.post.customer_id|default:$ATTRIBUTES.customer->customer_id}-->" />
+			<table class="type01 mgb30" summary="登録">
+				<tr>
+					<th>顧客コード<span class="note">*必須</span></th>
+					<td><input type="text" name="customer_code" id="customer_code" class="middle" value="<!--{$smarty.post.customer_code|default:$ATTRIBUTES.customer->customer_code}-->" /></td>
+					<th>端末ID<span class="note">*必須</span></th>
+					<td><input type="text" name="mobile_id" id="mobile_id" class="middle" value="<!--{$smarty.post.mobile_id|default:$ATTRIBUTES.customer->mobile_id}-->" /></td>
+				</tr>
+				<tr>
+					<th>顧客名</th>
+					<td>
+					<input type="text" name="sei" id="sei" class="middle" value="<!--{$smarty.post.sei|default:$ATTRIBUTES.customer->sei}-->" />
+					<input type="text" name="mei" id="mei" class="middle" value="<!--{$smarty.post.mei|default:$ATTRIBUTES.customer->mei}-->" />
+					</td>
+					<th>顧客名カナ</th>
+					<td>
+					<input type="text" name="sei_kana" id="sei_kana" class="middle" value="<!--{$smarty.post.sei_kana|default:$ATTRIBUTES.customer->sei_kana}-->" />
+					<input type="text" name="mei_kana" id="mei_kana" class="middle" value="<!--{$smarty.post.mei_kana|default:$ATTRIBUTES.customer->mei_kana}-->" />
+					</td>
+				</tr>
+				<tr>
+					<th>メールアドレス</th>
+					<td colspan="3"><input type="text" name="email" id="email" class="long" value="<!--{$smarty.post.email|default:$ATTRIBUTES.customer->email}-->" /></td>
+				</tr>
+				<tr>
+					<th>電話番号<span class="note">*必須</span></th>
+					<td>
+					<input type="text" name="tel1" id="tel1" class="small" value="<!--{$smarty.post.tel1|default:$ATTRIBUTES.customer->tel1}-->" />-
+					<input type="text" name="tel2" id="tel2" class="small" value="<!--{$smarty.post.tel2|default:$ATTRIBUTES.customer->tel2}-->" />-
+					<input type="text" name="tel3" id="tel3" class="small" value="<!--{$smarty.post.tel3|default:$ATTRIBUTES.customer->tel3}-->" />
+					</td>
+					<th>ポイント<span class="note">*必須</span></th>
+					<td><input type="text" name="point" id="point" class="middle" value="<!--{$smarty.post.point|default:$ATTRIBUTES.customer->point}-->" /></td>
+				</tr>
+			</table>
+			<table class="type02" summary="一覧">
+				<tr>
+					<th class="w20">契約名</th>
+					<th class="w9">契約期間</th>
+					<th class="w9">有効期限</th>
+					<th class="w9">契約期限</th>
+				</tr>
+				<!--{foreach from=$ATTRIBUTES.customer->customerContracts() key="index" item="customerContract"}-->
+				<!--{assign var="contract" value=$customerContract->contract()}-->
+				<tr>
+					<td><!--{$contract->contract_name}--></td>
+					<td><!--{$contract->contract_interval}-->ヶ月</td>
+					<td class="aln_r"><!--{$customerContract->expire_time|date_format:"%y/%m/%d"}--></td>
+					<td class="aln_r"><!--{$customerContract->contract_expire_time|date_format:"%y/%m/%d"}--></td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+			<p class="aln_c mgb30">
+			<input type="submit" name="add" id="add" value="登録内容を確認する" />
+			<input type="button" name="delete" id="delete" value="顧客を削除する" onclick="if(confirm('削除します。よろしいですか？')){ location.href = 'index.html?delete=1&product_id=<!--{$ATTRIBUTES.product->product_id}-->'; }" />
+			</p>
+			</form>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+</body>
+</html>

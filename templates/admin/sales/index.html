@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Shopping.Admin.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Shopping.Admin.Sales.List" />
+<link rel="stylesheet" type="text/css" href="../css/import.css" media="all" />
+<script type="text/javascript" language="javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.dropdownPlain.js"></script>
+<title>売上月次｜モエゲー管理画面</title>
+</head>
+
+<body>
+	<div id="wrap">
+    	<div id="header" class="clearfix">
+        	<h1>モエゲー管理システム</h1>            <ul class="dropdown">
+            	<li class="li01"><a href="../contents/index.html">コンテンツ</a>
+                	<ul class="submenu">
+                            <li><a href="../contents/index.html">作品一覧</a></li>
+                            <li><a href="../contents/item.html">商品一覧</a></li>
+                    </ul></li>
+            	<li class="li02"><a href="../user/index.html">ユーザー</a>
+                	<ul class="submenu">
+                            <li><a href="../user/index.html">ユーザー</a></li>
+                    </ul></li>
+            	<li class="li03"><a href="../sales/index.html">売上</a>
+                	<ul class="submenu">
+                            <li><a href="../sales/index.html">売上</a></li>
+                            <li><a href="../sales/pay_index.html">支払</a></li>
+                    </ul></li>
+            	<li class="li04"><a href="../magazine/index.html">メルマガ</a>
+                	<ul class="submenu">
+                            <li><a href="../magazine/index.html">メルマガメイン</a></li>
+                            <li><a href="../magazine/send.html">新規配信設定</a></li>
+                            <li><a href="../magazine/send_old.html">送信履歴</a></li>
+                    </ul></li>
+            	<li class="li05"><a href="../maintenance/index.html">マスターメンテナンス</a>
+                	<ul class="submenu">
+                            <li><a href="../maintenance/index.html">販売会社</a></li>
+                            <li><a href="../maintenance/maker.html">メーカー</a></li>
+                            <li><a href="../maintenance/genre.html">ジャンル</a></li>
+                            <li><a href="../maintenance/price.html">コース</a></li>
+                            <li><a href="../maintenance/detail.html">詳細設定</a></li>
+                    </ul></li>
+            </ul>
+            <input type="image" src="../images/common/btn_logout.gif" alt="ログアウト" width="73" height="22" />
+        </div>
+        <div id="contents">
+        	<p class="pankuzu"><a href="../index.html">メインメニュー</a> &gt; 売上月次</p>
+            <h2>【売上・支払管理】 売上月次</h2>
+			<div class="inner pdt15 clearfix">
+				<!--{*
+                <table class="type03" summary="サーチ">
+                    <tr>
+                    	<th class="w10">コンテンツ</th><td><input type="checkbox" name="" id="" /> ポケモエ　<input type="checkbox" name="" id="" /> ポケゲー　<input type="checkbox" name="" id="" /> ポケコミ　<input type="checkbox" name="" id="" /> モエゲー　<input type="checkbox" name="" id="" /> モエアニ　<input type="checkbox" name="" id="" /> モエコミ</td>
+                    </tr>
+                    <tr>
+                    	<th>サービス形態</th><td><input type="checkbox" name="" id="" /> docomo公式　<input type="checkbox" name="" id="" /> au公式　<input type="checkbox" name="" id="" /> softbank公式　<input type="checkbox" name="" id="" /> 勝手サイト
+                        </td>
+                    </tr>
+                    <tr>
+                    	<th>集計方法</th><td><input type="radio" name="" id="" /> 月次　<input type="radio" name="" id="" /> 年次</td>
+                    </tr>
+                </table>
+                
+				<p class="aln_c"><input type="button" name="" id="" value="上記の条件で検索する" class="mgb30" /></p>
+				*}-->
+                <div class="pagelink clearfix">
+                <ul class="year">
+				<li><a href="index.html?target_month=<!--{$ATTRIBUTES.last_year}-->">&lt;</a></li>
+				<li><!--{$ATTRIBUTES.this_year}-->年</li>
+				<!--{section name="month" start=1 loop=13}-->
+				<li>
+				<!--{if $ATTRIBUTES.this_month == $smarty.section.month.index}-->
+				<!--{$smarty.section.month.index}-->月
+				<!--{else}-->
+				<li><a href="index.html?target_month=<!--{$ATTRIBUTES.this_year}--><!--{$smarty.section.month.index|string_format:"%02d"}-->">
+				<!--{$smarty.section.month.index}-->月
+				</a>
+				<!--{/if}-->
+				</li>
+				<!--{/section}-->
+				<li><a href="index.html?target_month=<!--{$ATTRIBUTES.next_year}-->">&gt;</a></li>
+                </ul>
+                </div>
+                <table class="type02" summary="一覧">
+                	<tr>
+                   		<th class="w7">&nbsp;</th>
+                    	<th class="w13">購入数量</th>
+                    	<th class="w13">販売金額</th>
+                    	<th class="w13">決済手数料</th>
+                    	<th class="w13">売上</th>
+                    	<th class="w20">コンテンツ利用料</th>
+                    	<th class="w15">粗利益</th>
+                    	<th class="w4 aln_c end">内訳</th>
+					</tr>
+					<!--{assign var="total_quantity" value=0}-->
+					<!--{assign var="total_sales" value=0}-->
+					<!--{assign var="total_charge" value=0}-->
+					<!--{assign var="total_cost" value=0}-->
+					<!--{foreach from=$ATTRIBUTES.sales item="data"}-->
+                    <tr>
+						<td class="aln_r"><!--{$data.day}-->日</td>
+						<td class="aln_r"><!--{$data.quantity|number_format}--></td>
+						<!--{assign var="total_quantity" value=$total_quantity+$data.quantity}-->
+						<td class="aln_r"><!--{$data.total|number_format}--></td>
+						<!--{assign var="total_sales" value=$total_sales+$data.total}-->
+						<!--{assign var="charge" value=$data.total*0.1|ceil}-->
+						<!--{assign var="total_charge" value=$total_charge+$charge}-->
+						<td class="aln_r"><!--{$charge|number_format}--></td>
+						<td class="aln_r"><!--{$data.total - $charge|number_format}--></td>
+						<!--{assign var="cost" value=($data.total-$charge)*($data.developer_profit_rate+$data.seller_profit_rate)/100|ceil}-->
+						<!--{assign var="total_cost" value=$total_cost+$cost}-->
+						<td class="aln_r"><!--{$cost|number_format}--></td>
+						<td class="aln_r"><!--{$data.total - $charge - $cost|number_format}--></td>
+						<td class="aln_c"><a href="pay_detail.html?target_month=<!--{$ATTRIBUTES.this_year}--><!--{$ATTRIBUTES.this_month|string_format:"%02d"}--><!--{$data.day|string_format:"%02d"}-->">内訳</a></td>
+					</tr>
+					<!--{/foreach}-->
+                    <tr>
+                    	<td class="aln_r">合計</td>
+						<td class="aln_r"><!--{$total_quantity|number_format}--></td>
+						<td class="aln_r"><!--{$total_sales|number_format}--></td>
+						<td class="aln_r"><!--{$total_charge|number_format}--></td>
+						<td class="aln_r"><!--{$total_sales - $total_charge|number_format}--></td>
+						<td class="aln_r"><!--{$total_cost|number_format}--></td>
+						<td class="aln_r"><!--{$total_sales - $total_charge - $total_cost|number_format}--></td>
+						<td class="aln_c"><a href="pay_detail.html?target_month=<!--{$ATTRIBUTES.this_year}--><!--{$ATTRIBUTES.this_month|string_format:"%02d"}-->">内訳</a></td>
+                    </tr>
+                
+                </table>
+
+                <div class="pagelink clearfix">
+                <ul class="year">
+				<li><a href="index.html?target_month=<!--{$ATTRIBUTES.last_year}-->">&lt;</a></li>
+				<li><!--{$ATTRIBUTES.this_year}-->年</li>
+				<!--{section name="month" start=1 loop=13}-->
+				<li>
+				<!--{if $ATTRIBUTES.this_month == $smarty.section.month.index}-->
+				<!--{$smarty.section.month.index}-->月
+				<!--{else}-->
+				<li><a href="index.html?target_month=<!--{$ATTRIBUTES.this_year}--><!--{$smarty.section.month.index|string_format:"%02d"}-->">
+				<!--{$smarty.section.month.index}-->月
+				</a>
+				<!--{/if}-->
+				</li>
+				<!--{/section}-->
+				<li><a href="index.html?target_month=<!--{$ATTRIBUTES.next_year}-->">&gt;</a></li>
+                </ul>
+                </div>
+        </div>
+        
+        </div>
+        <address class="cl">Copyright &copy;2010 menue All Rights Reserved.</address>
+    </div>
+
+</body>
+</html>

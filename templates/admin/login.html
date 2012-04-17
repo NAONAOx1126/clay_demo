@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Logout" />
+<!--{include file="admin/common/site_header.html"}-->
+<title>ログイン｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+
+<body id="Login">
+	<div id="wrap" class="login">
+    	<div id="contents">
+            <div id="loginbox" class="clearfix">
+				<h1><!--{$smarty.server.CONFIGURE->site_name}--></h1>
+				<form action="index.html" method="POST">
+                <div class="loginform clearfix">
+                    <dl class="clearfix">
+                        <dt class="id">ID</dt>
+                        <dd><input type="text" name="login_id" id="login_id" /></dd>
+                        <dt class="pass">Password</dt>
+                        <dd><input type="password" name="password" id="password" /></dd>
+                    </dl>
+                    <p class="loginbtn"><input type="image" src="/admin/images/login/login_btn.gif" alt="login" name="" id="" /></p>
+				</div>
+				</form>
+            </div>
+			<!-- FOOTER -->
+			<!--{include file="admin/common/footer.html"}-->
+			<!-- FOOTER END -->
+        </div>
+    </div>
+
+</body>
+</html>

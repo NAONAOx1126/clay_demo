@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Base.Site.Detail" />
+<link rel="stylesheet" type="text/css" href="../../css/import.css" media="all" />
+<script type="text/javascript" language="javascript" src="../../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="../../js/jquery.dropdownPlain.js"></script>
+<title>サイト｜システムメンテ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+
+<body>
+	<div id="wrap">
+		<!-- HEADER -->
+		<!--{include file="admin/common/header.html"}-->
+		<!-- HEADER END -->
+        <div id="contents">
+        	<p class="pankuzu">
+        		<a href="/admin/index.html">メインメニュー</a>
+        		&gt; <a href="/admin/system/site/index.html">システムメンテ</a>
+        		&gt; サイト
+        	</p>
+            <h2>サイト登録</h2>
+			<!--{assign var="site" value=$ATTRIBUTES.site}-->
+            <div class="inner pdt15 clearfix">
+				<form action="regist.html" method="POST">
+				<input type="hidden" name="site_id" value="<!--{$site->site_id}-->" />
+                <table class="type01 mgb30" summary="登録">
+                    <tr>
+                    	<th>サイトコード<span class="note">*必須</span></th>
+                        <td><input type="text" name="site_code" id="site_code" value="<!--{$site->site_code}-->" class="middle" /></td>
+                    	<th>サイトパスワード</th>
+                        <td><input type="text" name="site_password" id="site_password" value="<!--{$site->site_password}-->" class="middle" /></td>
+                    </tr>
+                    <tr>
+                    	<th>サイト名</th>
+                        <td><input type="text" name="site_name" id="site_name" value="<!--{$site->site_name}-->" class="middle" /></td>
+                    	<th>ドメイン名</th>
+                        <td><input type="text" name="domain_name" id="domain_name" value="<!--{$site->domain_name}-->" class="middle" /></td>
+                    </tr>
+                    <tr>
+                    	<th>ホームディレクトリ</th>
+                        <td colspan="3"><input type="text" name="site_home" id="site_home" value="<!--{$site->site_home}-->" class="long" /></td>
+                    </tr>
+                </table>
+                <p><input type="submit" value="登録する" /></p>
+                </form>
+            </div>
+        </div>
+		<!-- FOOTER -->
+		<!--{include file="admin/common/footer.html"}-->
+		<!-- FOOTER END -->
+    </div>
+</body>
+</html>

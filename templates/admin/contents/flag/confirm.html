@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Base.Checks.Required" key="flag_text" />
+<meta name="loadmodule" content="Base.Checks.Required" key="sort_order" />
+<meta name="loadmodule" content="Base.Pages.CheckError" error="admin/contents/flag/edit.html" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="function_name" value="商品フラグ"}-->
+<title><!--{$function_name}-->｜コンテンツ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/contents/index.html">コンテンツ</a> &gt; <a href="/admin/contents/flag/index.html">商品フラグ一覧</a> &gt; <!--{$function_name}--></p>
+		<h2><!--{$function_name}-->｜コンテンツ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</h2>
+		<div class="inner pdt15 clearfix">
+			<form action="complete.html" method="POST">
+			<h3>商品フラグ情報</h3>
+			<table class="type01 mgb30" summary="登録">
+				<tr>
+					<th>表示順<span class="note">*必須</span></th>
+					<td colspan="3">
+						<!--{$smarty.post.sort_order}-->
+					</td>
+				</tr>
+				<!--{assign var="image_titles" value=","|explode:"フラグアイコン,フラグ画像"}-->
+				<!--{assign var="image_names" value=","|explode:"flag_image_s,flag_image"}-->
+				<!--{foreach from=$image_names key="index" item="image_name"}-->
+				<!--{assign var="image_title" value=$image_titles[$index]}--> 
+				<!--{if $smarty.post[$image_name] != ""}-->
+				<tr>
+					<th><!--{$image_title}--><span class="note">*必須</span></th>
+					<td>
+					<img src="<!--{$smarty.post[$image_name]}-->">
+					</td>
+				</tr>
+				<!--{/if}-->
+				<!--{/foreach}-->
+				<tr>
+					<th>フラグテキスト<span class="note">*必須</span></th>
+					<td colspan="3">
+						<!--{$smarty.post.flag_text}-->
+					</td>
+				</tr>
+			</table>
+			<p class="aln_c mgb30"><input type="submit" name="save" id="save" value="この内容で登録します。" /></p>
+			</form>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+</body>
+</html>

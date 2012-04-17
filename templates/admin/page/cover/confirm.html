@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Base.Checks.Required" key="cover_title" />
+<meta name="loadmodule" content="Base.Checks.Required" key="cover_image" />
+<meta name="loadmodule" content="Base.Checks.Required" key="sort_order" />
+<meta name="loadmodule" content="Base.Pages.CheckError" error="admin/page/cover/edit.html" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="function_name" value="カバー画像"}-->
+<title><!--{$function_name}-->｜ページ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/page/index.html">ページ</a> &gt; <a href="/admin/page/cover/index.html">カバー画像一覧</a> &gt; <!--{$function_name}--></p>
+		<h2><!--{$function_name}-->｜ページ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</h2>
+		<div class="inner pdt15 clearfix">
+			<form action="complete.html" method="POST">
+			<h3>カバー画像情報</h3>
+			<table class="type01 mgb30" summary="登録">
+				<tr>
+					<th>表示順<span class="note">*必須</span></th>
+					<td colspan="3"><!--{$smarty.post.sort_order}--></td>
+				</tr>
+				<tr>
+					<th>カバータイトル<span class="note">*必須</span></th>
+					<td colspan="3"><!--{$smarty.post.cover_title}--></td>
+				</tr>
+				<!--{assign var="image_titles" value=","|explode:"カバー画像"}-->
+				<!--{assign var="image_names" value=","|explode:"cover_image"}-->
+				<!--{foreach from=$image_names key="index" item="image_name"}-->
+				<!--{assign var="image_title" value=$image_titles[$index]}--> 
+				<tr>
+					<th><!--{$image_title}--></th>
+					<td>
+					<!--{if $smarty.post[$image_name] != ""}-->
+					<img src="<!--{$smarty.post[$image_name]}-->">
+					<!--{/if}-->
+					</td>
+				</tr>
+				<!--{/foreach}-->
+				<tr>
+					<th>カバーURL<span class="note">*必須</span></th>
+					<td colspan="3"><!--{$smarty.post.cover_url}--></td>
+				</tr>
+				<tr>
+					<th>表示期間</th>
+					<td colspan="3">
+						<!--{$smarty.post.start_time|date_format:"%Y-%m-%d %H:%M"}-->〜<!--{$smarty.post.end_time|date_format:"%Y-%m-%d %H:%M"}-->
+					</td>
+				</tr>
+			</table>
+			<p class="aln_c mgb30"><input type="submit" name="save" id="save" value="この内容で登録します。" /></p>
+			</form>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+</body>
+</html>

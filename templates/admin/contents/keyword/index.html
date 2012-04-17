@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Product.Category.Save" error="admin/contents/keyword/index.html" />
+<meta name="loadmodule" content="Product.Category.Delete" error="admin/contents/keyword/index.html" />
+<meta name="loadmodule" content="Product.Category.Reset" />
+<meta name="loadmodule" content="Product.Category.Detail" type="3" />
+<meta name="loadmodule" content="Product.Category.List" type="3" sort_key="order" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="category_group_id" value="0"}-->
+<!--{assign var="category_type_id" value="3"}-->
+<!--{assign var="category_type_name" value="キーワード"}-->
+<title><!--{$category_type_name}-->｜マスターメンテナンス｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/contents/index.html">コンテンツ</a> &gt; <!--{$category_type_name}--></p>
+		<h2>【コンテンツ】<!--{$category_type_name}--></h2>
+		<!--{foreach from=$ERRORS item="error"}-->
+		<div><!--{$error|escape}--></div>
+		<!--{/foreach}-->
+		
+		<div class="inner pdt15 clearfix">
+			<form action="?" method="POST">
+			<table class="type03 mgb30" summary="サーチ">
+				<tr>
+					<input type="hidden" name="category_id" value="<!--{$ATTRIBUTES.category->category_id}-->" />
+					<input type="hidden" name="category_group_id" value="<!--{$category_group_id}-->" />
+					<input type="hidden" name="category_type_id" value="<!--{$category_type_id}-->" />
+					<input type="hidden" name="create_time" value="<!--{$ATTRIBUTES.category->create_time}-->" />
+					<th class="w7">ソート</th><td class="w20"><input type="text" name="sort_order" id="sort_order" value="<!--{$ATTRIBUTES.category->sort_order}-->" /></td>
+					<th class="w7"><!--{$category_type_name}--></th><td><input type="text" name="category_name" id="category_name" class="long" value="<!--{$ATTRIBUTES.category->category_name}-->" /></td>
+					<td class="w7 aln_c"><input type="submit" name="save" id="save" value="登録" /><input type="submit" name="reset" id="reset" value="キャンセル" /></td>
+				</tr>
+			</table>
+			</form>
+			
+			<div class="pagelink clearfix">
+			<p class="total">トータル　<!--{$ATTRIBUTES.categories|@count|number_format}-->件</p>
+			</div>
+			<form action="?" method="POST">
+			<input type="submit" name="delete" id="delete_top" value="チェックした<!--{$category_type_name}-->を削除" class="mgb10" onclick="return confirm('チェックした<!--{$category_type_name}-->を削除します。')" />
+			<table class="type02" summary="一覧">
+				<tr>
+					<th class="w4">&nbsp;</th>
+					<th class="w4">&nbsp;</th>
+					<th class="w9">ソート <a href="?order=sort_order">▲</a> <a href="?order=rev@sort_order">▼</a></th>
+					<th><!--{$category_type_name}--> <a href="?order=category_name">▲</a> <a href="?order=rev@category_name">▼</a></th>
+					<th class="w9">登録日 <a href="?order=create_time">▲</a> <a href="?order=rev@create_time">▼</a></th>
+					<th class="w9">更新日 <a href="?order=update_time">▲</a> <a href="?order=rev@update_time">▼</a></th>
+				</tr>
+				<!--{foreach from=$ATTRIBUTES.categories key="index" item="category"}-->
+				<tr>
+					<td class="aln_c"><input type="checkbox" name="category_id[<!--{$category->category_id}-->]" value="<!--{$category->category_id}-->" /></td>
+					<td class="aln_c"><input type="button" name="edit_button" value="編集" onclick="location.href='?category_id=<!--{$category->category_id}-->';" /></td>
+					<td class="aln_r"><!--{$category->sort_order}--></td>
+					<td><!--{$category->category_name|escape}--></td>
+					<td class="aln_r"><!--{$category->create_time}--></td>
+					<td class="aln_r"><!--{$category->update_time}--></td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+			<input type="submit" name="delete" id="delete_bottom" value="チェックした<!--{$category_type_name}-->を削除" class="mgb10" onclick="return confirm('チェックした<!--{$category_type_name}-->を削除します。')" />
+			</form>
+			<p class="total">トータル　<!--{$ATTRIBUTES.categories|@count|number_format}-->件</p>
+			</div>                
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+
+</body>
+</html>

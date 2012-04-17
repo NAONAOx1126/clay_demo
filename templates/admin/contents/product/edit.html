@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Product.Developer.List" />
+<meta name="loadmodule" content="Product.Seller.List" />
+<meta name="loadmodule" content="Product.Flag.List" />
+<meta name="loadmodule" content="Product.Category.Types" sort_key="sort_order" />
+<meta name="loadmodule" content="Product.Detail" />
+<meta name="loadmodule" content="File.Image.Upload" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="function_name" value="商品"}-->
+<title><!--{$function_name}-->｜コンテンツ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<script type="text/javascript">
+$(function(){
+	$("#sale_start").AnyTime_picker({ format: "%Y-%m-%d %H:%i" } );
+	$("#sale_end").AnyTime_picker({ format: "%Y-%m-%d %H:%i" } );
+});
+</script>
+</head>
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/contents/index.html">コンテンツ</a> &gt; <a href="/admin/contents/product/index.html">商品一覧</a> &gt; <!--{$function_name}--></p>
+		<h2><!--{$function_name}-->｜コンテンツ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</h2>
+		<div class="inner pdt15 clearfix">
+			<form action="edit.html" method="POST" enctype="multipart/form-data">
+			<h3>商品基本情報</h3>
+			<input type="hidden" name="product_id" value="<!--{$smarty.post.product_id|default:$ATTRIBUTES.product->product_id}-->" />
+			<input type="hidden" name="option[stock]" value="0" />
+			<input type="hidden" name="option[stock_unlimited]" value="1" />
+			<table class="type01 mgb30" summary="登録">
+				<tr>
+					<th>表示順<span class="note">*必須</span></th>
+					<td colspan="3"><input type="text" name="sort_order" id="sort_order" class="middle" value="<!--{$smarty.post.sort_order|default:$ATTRIBUTES.product->sort_order}-->" /></td>
+				</tr>
+				<tr>
+					<th>メーカー</th>
+					<td colspan="3">
+					<select name="developer_id">
+					<option value="">未設定</option>
+					<!--{foreach from=$ATTRIBUTES.developers item="developer"}-->
+					<option value="<!--{$developer->developer_id}-->"<!--{if $developer->developer_id == $smarty.post.developer_id || $smarty.post.developer_id == "" && $developer->developer_id == $ATTRIBUTES.product->developer_id}--> selected<!--{/if}-->><!--{$developer->developer_name}--></option>
+					<!--{/foreach}-->
+					</select>
+					<input type="text" name="developer_profit" value="<!--{$smarty.post.developer_profit|default:$ATTRIBUTES.product->developer_profit}-->" size="4" maxlength="2" />%
+					</td>
+				</tr>
+				<tr>
+					<th>販売会社</th>
+					<td colspan="3">
+					<select name="seller_id">
+					<option value="">未設定</option>
+					<!--{foreach from=$ATTRIBUTES.sellers item="seller"}-->
+					<option value="<!--{$seller->seller_id}-->"<!--{if $seller->seller_id == $smarty.post.seller_id || $smarty.post.seller_id == "" && $seller->seller_id == $ATTRIBUTES.product->seller_id}--> selected<!--{/if}-->><!--{$seller->seller_name}--></option>
+					<!--{/foreach}-->
+					</select>
+					<input type="text" name="seller_profit" value="<!--{$smarty.post.seller_profit|default:$ATTRIBUTES.product->seller_profit}-->" size="4" maxlength="2" />%
+					</td>
+				</tr>
+				<tr>
+					<th>商品コード<span class="note">*必須</span></th>
+					<td><input type="text" name="product_code" id="product_code" class="middle" value="<!--{$smarty.post.product_code|default:$ATTRIBUTES.product->product_code}-->" /></td>
+					<th>作品名</th>
+					<td><input type="text" name="parent_name" id="parent_name" class="middle" value="<!--{$smarty.post.parent_name|default:$ATTRIBUTES.product->parent_name}-->" /></td>
+				</tr>
+				<tr>
+					<th>商品名<span class="note">*必須</span></th>
+					<td><input type="text" name="product_name" id="product_name" class="middle" value="<!--{$smarty.post.product_name|default:$ATTRIBUTES.product->product_name}-->" /></td>
+					<th>商品名カナ</th>
+					<td><input type="text" name="product_name_kana" id="product_name_kana" class="middle" value="<!--{$smarty.post.product_name_kana|default:$ATTRIBUTES.product->product_name_kana}-->" /></td>
+				</tr>
+				<tr>
+					<th width="25%">商品フラグ</th>
+					<td colspan="3">
+					<!--{foreach from=$ATTRIBUTES.flags item="flag"}-->
+					<input type="checkbox" name="flag[<!--{$flag->flag_id}-->]" value="<!--{$flag->flag_id}-->"<!--{if $smarty.post.flag[$flag->flag_id] == $flag->flag_id || !isset($smarty.post.flag[$flag->flag_id]) && $ATTRIBUTES.product->hasFlag($flag->flag_id)}--> checked<!--{/if}--> />
+					<!--{$flag->flag_text}-->&nbsp;
+					<!--{/foreach}-->
+					</td>
+				</tr>
+				<tr>
+					<th>説明（一覧用）<span class="note">*必須</span></th>
+					<td colspan="3"><textarea name="list_comment" id="list_comment" cols="100" rows="5"><!--{$smarty.post.list_comment|default:$ATTRIBUTES.product->list_comment}--></textarea></td>
+				</tr>
+				<tr>
+					<th>説明<span class="note">*必須</span></th>
+					<td colspan="3"><textarea name="detail_comment" id="detail_comment" cols="100" rows="5"><!--{$smarty.post.detail_comment|default:$ATTRIBUTES.product->detail_comment}--></textarea></td>
+				</tr>
+				<tr>
+					<th>通常価格<span class="note">*必須</span></th>
+					<td><input type="text" name="price" id="price" class="middle" value="<!--{$smarty.post.price|default:$ATTRIBUTES.product->price}-->" />円</td>
+					<th>販売価格<span class="note">*必須</span></th>
+					<td><input type="text" name="sale_price" id="sale_price" class="middle" value="<!--{$smarty.post.sale_price|default:$ATTRIBUTES.product->sale_price}-->" />円</td>
+				</tr>
+				<tr>
+					<th>付与ポイント<span class="note">*必須</span></th>
+					<td><input type="text" name="point_rate" id="point_rate" class="middle" value="<!--{$smarty.post.point_rate|default:$ATTRIBUTES.product->point_rate}-->" />ポイント</td>
+					<th></th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>作家名</th>
+					<td><input type="text" name="creator_name" id="creator_name" class="middle" value="<!--{$smarty.post.creator_name|default:$ATTRIBUTES.product->creator_name}-->" /></td>
+					<th>作家名カナ</th>
+					<td><input type="text" name="creator_name_kana" id="creator_name_kana" class="middle" value="<!--{$smarty.post.creator_name_kana|default:$ATTRIBUTES.product->creator_name_kana}-->" /></td>
+				</tr>
+				<tr>
+					<th>販売期間</th>
+					<td colspan="3">
+						<input type="text" name="sale_start" id="sale_start" value="<!--{$smarty.post.sale_start|default:$ATTRIBUTES.product->sale_start|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
+						<input type="button" value="クリア" onClick="$('#sale_start').val('');" />
+						〜
+						<input type="text" name="sale_end" id="sale_end" value="<!--{$smarty.post.sale_end|default:$ATTRIBUTES.product->sale_end|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
+						<input type="button" value="クリア" onClick="$('#sale_end').val('');" />
+					</td>
+				</tr>
+			</table>
+			<h3>カテゴリ</h3>
+			<table class="type01" summary="登録">
+				<!--{foreach from=$ATTRIBUTES.category_types item="category_type"}-->
+				<tr>
+					<th width="25%"><!--{$category_type->category_type|escape}--></th>
+					<td>
+					<!--{foreach from=$category_type->categories("sort_order") item="category"}-->
+					<input type="checkbox" name="category[<!--{$category->category_id}-->]" value="<!--{$category->category_id}-->"<!--{if $smarty.post.category[$category->category_id] == $category->category_id || !isset($smarty.post.category[$category->category_id]) && $ATTRIBUTES.product->hasCategory($category->category_id)}--> checked<!--{/if}--> />
+					<!--{$category->category_name}-->&nbsp;
+					<!--{/foreach}-->
+					</td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+			<h3>画像</h3>
+			<!--{assign var="image_titles" value=","|explode:"一覧,詳細,イメージ１,イメージ２,イメージ３,イメージ４"}-->
+			<!--{assign var="image_names" value=","|explode:"list,detail,image1,image2,image3,image4"}-->
+			<table class="type01" summary="登録">
+				<!--{foreach from=$image_names key="index" item="image_name"}-->
+				<!--{assign var="image_title" value=$image_titles[$index]}--> 
+				<tr>
+					<th><!--{$image_title}--></th>
+					<td>
+					<!--{if $smarty.post.image[$image_name] != "" || $ATTRIBUTES.product->image($image_name)->image != ""}-->
+					<img src="<!--{$smarty.post.image[$image_name]|default:$ATTRIBUTES.product->image($image_name)->image}-->">
+					<!--{/if}-->
+					<input type="hidden" name="image_name[<!--{$image_name}-->]" value="<!--{$smarty.post.image_name[$image_name]|default:$ATTRIBUTES.product->image($image_name)->image_name}-->" />
+					<input type="hidden" name="image[<!--{$image_name}-->]" value="<!--{$smarty.post.image[$image_name]|default:$ATTRIBUTES.product->image($image_name)->image}-->" />
+					<input type="file" name="image[<!--{$image_name}-->]" id="image_<!--{$image_name}-->" />
+					<input type="submit" name="upload[image][<!--{$image_name}-->]" id="upload_image_<!--{$image_name}-->" value="アップロード" />
+					</td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+			<h3>コンテンツ</h3>
+			<!--{assign var="image_titles" value=","|explode:"Androidアプリ"}-->
+			<!--{assign var="image_names" value=","|explode:"application"}-->
+			<table class="type01" summary="登録">
+				<!--{foreach from=$image_names key="index" item="image_name"}-->
+				<!--{assign var="image_title" value=$image_titles[$index]}--> 
+				<tr>
+					<th><!--{$image_title}--></th>
+					<td>
+					<!--{if $smarty.post.image[$image_name] != "" || $ATTRIBUTES.product->image($image_name)->image_name != ""}-->
+					<!--{$smarty.post.image_name[$image_name]|default:$ATTRIBUTES.product->image($image_name)->image_name}-->
+					<!--{/if}-->
+					<input type="hidden" name="image_name[<!--{$image_name}-->]" value="<!--{$smarty.post.image_name[$image_name]|default:$ATTRIBUTES.product->image($image_name)->image_name}-->" />
+					<input type="hidden" name="image[<!--{$image_name}-->]" value="<!--{$smarty.post.image[$image_name]|default:$ATTRIBUTES.product->image($image_name)->image}-->" />
+					<input type="file" name="image[<!--{$image_name}-->]" id="image_<!--{$image_name}-->" />
+					<input type="submit" name="upload[image][<!--{$image_name}-->]" id="upload_image_<!--{$image_name}-->" value="アップロード" />
+					</td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+			<p class="aln_c mgb30">
+			<input type="submit" name="add" id="add" value="登録内容を確認する" onclick="this.form.action = 'confirm.html'" />
+			<input type="button" name="delete" id="delete" value="商品を削除する" onclick="if(confirm('削除します。よろしいですか？')){ location.href = 'index.html?delete=1&product_id=<!--{$smarty.post.product_id|default:$ATTRIBUTES.product->product_id}-->'; }" />
+			</p>
+			</form>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+</body>
+</html>

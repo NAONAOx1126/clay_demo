@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<!--{include file="admin/common/site_header.html"}-->
+<title>メインメニュー｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu">メインメニュー</p>
+		<h2>メインメニュー</h2>
+		<div class="inner clearfix">
+			<dl class="main">
+				<dt><span>顧客</span></dt>
+				<dd class="sub">
+					  <ul>
+						<li><a href="/admin/customer/contract/index.html">契約一覧</a></li>
+						<li><a href="/admin/customer/customer/index.html">顧客一覧</a></li>
+						<li><a href="/admin/customer/ticket/index.html">問い合わせ一覧</a></li>
+					</ul>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+</body>
+</html>

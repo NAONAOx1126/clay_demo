@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Product.Developer.List" />
+<meta name="loadmodule" content="Product.Seller.List" />
+<meta name="loadmodule" content="Product.Delete" />
+<meta name="loadmodule" content="Product.Page" sort_key="order" clear="1" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="group_name" value="作品"}-->
+<!--{assign var="function_name" value="商品"}-->
+<title><!--{$function_name}-->｜コンテンツ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<!--{assign var="product_links" value=$ATTRIBUTES.products_pager->getLinks()}-->
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/contents/index.html">コンテンツ</a> &gt; <!--{$function_name}--></p>
+		<h2>【コンテンツ】<!--{$function_name}--></h2>
+		<!--{foreach from=$ERRORS item="error"}-->
+		<div><!--{$error|escape}--></div>
+		<!--{/foreach}-->
+		
+		<div class="inner pdt15 clearfix">
+			<p class="add"><a href="edit.html">新規<!--{$function_name}-->登録</a></p>
+			<form action="?" method="GET">
+			<table class="type03" summary="サーチ">
+				<tr>
+					<th><!--{$group_name}-->名</th><td><input type="text" name="search[part:parent_name]" id="search_parent_name" value="<!--{$smarty.post.search["part:parent_name"]}-->" /></td>
+					<th><!--{$function_name}-->名</th><td><input type="text" name="search[part:product_name]" id="search_product_name" value="<!--{$smarty.post.search["part:product_name"]}-->" /></td>
+				</tr>
+				<tr>
+					<th>販売会社</th><td>
+						<select name="search[seller_id]">
+						<option value="">未設定</option>
+						<!--{foreach from=$ATTRIBUTES.sellers item="seller"}-->
+						<option value="<!--{$seller->seller_id}-->"<!--{if $seller->seller_id == $smarty.post.search.seller_id}--> selected<!--{/if}-->><!--{$seller->seller_name}--></option>
+						<!--{/foreach}-->
+						</select>
+					</td>
+					<th>メーカー</th><td>
+						<select name="search[developer_id]">
+						<option value="">未設定</option>
+						<!--{foreach from=$ATTRIBUTES.developers item="developer"}-->
+						<option value="<!--{$developer->developer_id}-->"<!--{if $developer->developer_id == $smarty.post.search.developer_id}--> selected<!--{/if}-->><!--{$developer->developer_name}--></option>
+						<!--{/foreach}-->
+						</select>
+					</td>
+				</tr>
+			</table>
+			<p class="aln_c"><input type="submit" name="" id="" value="上記の条件で検索する" class="mgb30" /></p>
+			</form>
+			
+			<div class="pagelink clearfix">
+			<!--{$product_links.all}--><br />
+			<p class="total">トータル　<!--{$ATTRIBUTES.products_pager->numItems()|number_format}-->件</p>
+			</div>
+			<table class="type02" summary="一覧">
+				<tr>
+					   <th class="w4">詳細</th>
+					<th class="w7">並び順<br /><a href="?order=sort_order">▲</a> <a href="?order=rev@sort_order">▼</a></th>
+					<th class="w7">商品番号<br /><a href="?order=product_code">▲</a> <a href="?order=rev@product_code">▼</a></th>
+					<th class="w7">商品画像</th>
+					<th class="w20">商品名<br /><a href="?order=product_name">▲</a> <a href="?order=rev@product_name">▼</a></th>
+					<th class="w4">定価</th>
+					<th class="w4">販売価格</th>
+					<th class="w10">販売会社<br /><a href="?order=seller_id">▲</a> <a href="?order=rev@seller_id">▼</a></th>
+					<th class="w4">手数料率</th>
+					<th class="w10">メーカー<br /><a href="?order=developer_id">▲</a> <a href="?order=rev@developer_id">▼</a></th>
+					<th class="w4">手数料率</th>
+					<th class="w9">登録日<br /><a href="index.html?order=create_time">▲</a> <a href="index.html?order=rev@create_time">▼</a></th>
+					<th class="w9 end">更新日<br /><a href="index.html?order=update_time">▲</a> <a href="index.html?order=rev@update_time">▼</a></th>
+				</tr>
+				<!--{foreach from=$ATTRIBUTES.products key="index" item="product"}-->
+				<tr>
+					<td class="aln_c"><input type="button" name="detail" id="detail_<!--{$product->product_id}-->" value="詳細" onclick="location.href='edit.html?product_id=<!--{$product->product_id}-->'" /></td>
+					<td class="aln_r"><!--{$product->sort_order}--></td>
+					<td class="aln_r"><!--{$product->product_code}--></td>
+					<td class="aln_r">
+					<!--{if $product->image("list")->image != ""}-->
+					<img src="<!--{$product->image("list")->image}-->" alt="アイコン" />
+					<!--{/if}-->
+					</td>
+					<td><!--{$product->product_name|escape}--></td>
+					<td class="aln_r"><!--{$product->price|number_format}-->円</td>
+					<td class="aln_r"><!--{if $product->sale_price >= 0}--><!--{$product->sale_price|number_format}-->円<!--{else}-->未設定<!--{/if}--></td>
+					<td><!--{$product->seller()->seller_name|escape}--></td>
+					<td><!--{$product->seller_profit|number_format}-->%</td>
+					<td><!--{$product->developer()->developer_name|escape}--></td>
+					<td><!--{$product->developer_profit|number_format}-->%</td>
+					<td class="aln_r"><!--{$product->create_time|date_format:"%y/%m/%d"}--></td>
+					<td class="aln_r"><!--{$product->update_time|date_format:"%y/%m/%d"}--></td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+			
+			<div class="pagelink clearfix">
+			<!--{$product_links.all}--><br />
+			<p class="total">トータル　<!--{$ATTRIBUTES.products_pager->numItems()|number_format}-->件</p>
+			</div>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+</body>
+</html>

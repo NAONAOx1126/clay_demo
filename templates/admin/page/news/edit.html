@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Content.News.Detail" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="function_name" value="新着情報"}-->
+<title><!--{$function_name}-->｜ページ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<script type="text/javascript">
+$(function(){
+	$("#start_time").AnyTime_picker({ format: "%Y-%m-%d %H:%i" } );
+	$("#end_time").AnyTime_picker({ format: "%Y-%m-%d %H:%i" } );
+});
+</script>
+</head>
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/page/index.html">ページ</a> &gt; <a href="/admin/page/news/index.html"><!--{$function_name}-->一覧</a> &gt; <!--{$function_name}--></p>
+		<h2><!--{$function_name}-->｜ページ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</h2>
+		<div class="inner pdt15 clearfix">
+			<form action="edit.html" method="POST" enctype="multipart/form-data">
+			<h3><!--{$function_name}-->情報</h3>
+			<input type="hidden" name="news_id" value="<!--{$smarty.post.news_id|default:$ATTRIBUTES.news->news_id}-->" />
+			<table class="type01 mgb30" summary="登録">
+				<tr>
+					<th>新着タイトル<span class="note">*必須</span></th>
+					<td colspan="3"><input type="text" name="news_title" id="news_title" class="middle" value="<!--{$smarty.post.news_title|default:$ATTRIBUTES.news->news_title}-->" /></td>
+				</tr>
+				<tr>
+					<th>新着リンクURL<span class="note">*必須</span></th>
+					<td colspan="3"><input type="text" name="news_url" id="news_url" class="middle" value="<!--{$smarty.post.news_url|default:$ATTRIBUTES.news->news_url}-->" /></td>
+				</tr>
+				<tr>
+					<th>新着情報<span class="note">*必須</span></th>
+					<td colspan="3"><textarea name="news_body" id="news_body" cols="100" rows="5"><!--{$smarty.post.news_body|default:$ATTRIBUTES.news->news_body}--></textarea></td>
+				</tr>
+				<tr>
+					<th>表示期間</th>
+					<td colspan="3">
+						<input type="text" name="start_time" id="start_time" value="<!--{$smarty.post.start_time|default:$ATTRIBUTES.news->start_time|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
+						<input type="button" value="クリア" onClick="$('#start_time').val('');" />
+						〜
+						<input type="text" name="end_time" id="end_time" value="<!--{$smarty.post.end_time|default:$ATTRIBUTES.news->end_time|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
+						<input type="button" value="クリア" onClick="$('#end_time').val('');" />
+					</td>
+				</tr>
+			</table>
+			<p class="aln_c mgb30">
+			<input type="submit" name="add" id="add" value="登録内容を確認する" onclick="this.form.action = 'confirm.html'" />
+			<input type="button" name="delete" id="delete" value="カバー画像を削除する" onclick="if(confirm('削除します。よろしいですか？')){ location.href = 'index.html?delete=1&news_id=<!--{$smarty.post.news_id|default:$ATTRIBUTES.news->news_id}-->'; }" />
+			</p>
+			</form>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+</body>
+</html>

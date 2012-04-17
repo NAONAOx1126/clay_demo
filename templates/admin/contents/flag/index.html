@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Product.Flag.Delete" />
+<meta name="loadmodule" content="Product.Flag.List" sort_key="order" clear="1" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="function_name" value="商品フラグ"}-->
+<title><!--{$function_name}-->｜コンテンツ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- HEADER -->
+	<!--{include file="admin/common/header.html"}-->
+	<!-- HEADER END -->
+	<div id="contents">
+		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/contents/index.html">コンテンツ</a> &gt; <!--{$function_name}--></p>
+		<h2>【コンテンツ】<!--{$function_name}--></h2>
+		<!--{foreach from=$ERRORS item="error"}-->
+		<div><!--{$error|escape}--></div>
+		<!--{/foreach}-->
+		
+		<div class="inner pdt15 clearfix">
+			<p class="add"><a href="edit.html">新規<!--{$function_name}-->登録</a></p>
+			<table class="type02" summary="一覧">
+				<tr>
+					<th class="w4">詳細</th>
+					<th class="w7">並び順<br /><a href="?order=sort_order">▲</a> <a href="?order=rev@sort_order">▼</a></th>
+					<th class="w7">フラグアイコン</th>
+					<th class="w7">フラグ画像</th>
+					<th class="w20">フラグテキスト<br /><a href="?order=flag_text">▲</a> <a href="?order=rev@flag_text">▼</a></th>
+					<th class="w9">登録日<br /><a href="index.html?order=create_time">▲</a> <a href="index.html?order=rev@create_time">▼</a></th>
+					<th class="w9 end">更新日<br /><a href="index.html?order=update_time">▲</a> <a href="index.html?order=rev@update_time">▼</a></th>
+				</tr>
+				<!--{foreach from=$ATTRIBUTES.flags key="index" item="flag"}-->
+				<tr>
+					<td class="aln_c"><input type="button" name="detail" id="detail_<!--{$flag->flag_id}-->" value="詳細" onclick="location.href='edit.html?flag_id=<!--{$flag->flag_id}-->'" /></td>
+					<td class="aln_r"><!--{$flag->sort_order}--></td>
+					<td class="aln_c"><!--{if $flag->flag_image_s != ""}--><img src="<!--{$flag->flag_image_s}-->" /><!--{/if}--></td>
+					<td class="aln_c"><!--{if $flag->flag_image != ""}--><img src="<!--{$flag->flag_image}-->" /><!--{/if}--></td>
+					<td><!--{$flag->flag_text|escape}--></td>
+					<td class="aln_r"><!--{$product->create_time|date_format:"%y/%m/%d"}--></td>
+					<td class="aln_r"><!--{$product->update_time|date_format:"%y/%m/%d"}--></td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+		</div>
+	</div>
+	<!-- FOOTER -->
+	<!--{include file="admin/common/footer.html"}-->
+	<!-- FOOTER END -->
+</div>
+</body>
+</html>

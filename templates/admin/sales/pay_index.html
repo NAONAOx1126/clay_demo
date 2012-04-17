@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="stylesheet" type="text/css" href="../css/import.css" media="all" />
+<script type="text/javascript" language="javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.dropdownPlain.js"></script>
+<title>支払月次｜モエゲー管理画面</title>
+</head>
+
+<body>
+	<div id="wrap">
+    	<div id="header" class="clearfix">
+        	<h1>モエゲー管理システム</h1>            <ul class="dropdown">
+            	<li class="li01"><a href="../contents/index.html">コンテンツ</a>
+                	<ul class="submenu">
+                            <li><a href="../contents/index.html">作品一覧</a></li>
+                            <li><a href="../contents/item.html">商品一覧</a></li>
+                    </ul></li>
+            	<li class="li02"><a href="../user/index.html">ユーザー</a>
+                	<ul class="submenu">
+                            <li><a href="../user/index.html">ユーザー</a></li>
+                    </ul></li>
+            	<li class="li03"><a href="../sales/index.html">売上</a>
+                	<ul class="submenu">
+                            <li><a href="../sales/index.html">売上</a></li>
+                            <li><a href="../sales/pay_index.html">支払</a></li>
+                    </ul></li>
+            	<li class="li04"><a href="../magazine/index.html">メルマガ</a>
+                	<ul class="submenu">
+                            <li><a href="../magazine/index.html">メルマガメイン</a></li>
+                            <li><a href="../magazine/send.html">新規配信設定</a></li>
+                            <li><a href="../magazine/send_old.html">送信履歴</a></li>
+                    </ul></li>
+            	<li class="li05"><a href="../maintenance/index.html">マスターメンテナンス</a>
+                	<ul class="submenu">
+                            <li><a href="../maintenance/index.html">販売会社</a></li>
+                            <li><a href="../maintenance/maker.html">メーカー</a></li>
+                            <li><a href="../maintenance/genre.html">ジャンル</a></li>
+                            <li><a href="../maintenance/price.html">コース</a></li>
+                            <li><a href="../maintenance/detail.html">詳細設定</a></li>
+                    </ul></li>
+            </ul>
+            <input type="image" src="../images/common/btn_logout.gif" alt="ログアウト" width="73" height="22" />
+        </div>
+        <div id="contents">
+        	<p class="pankuzu"><a href="../index.html">メインメニュー</a> &gt; <a href="index.html">売上</a> &gt; 支払月次</p>
+            <h2>【売上・支払管理】 支払月次</h2>
+            <div class="inner pdt15 clearfix">
+                <table class="type03" summary="サーチ">
+                    <tr>
+                    	<th class="w10">コンテンツ</th><td><input type="checkbox" name="" id="" /> ポケモエ　<input type="checkbox" name="" id="" /> ポケゲー　<input type="checkbox" name="" id="" /> ポケコミ　<input type="checkbox" name="" id="" /> モエゲー　<input type="checkbox" name="" id="" /> モエアニ　<input type="checkbox" name="" id="" /> モエコミ</td>
+                    </tr>
+                    <tr>
+                    	<th>サービス形態</th><td><input type="checkbox" name="" id="" /> docomo公式　<input type="checkbox" name="" id="" /> au公式　<input type="checkbox" name="" id="" /> softbank公式　<input type="checkbox" name="" id="" /> 勝手サイト
+                        </td>
+                    </tr>
+                    <tr>
+                    	<th>集計方法</th><td><input type="radio" name="" id="" /> 月次　<input type="radio" name="" id="" /> 年次</td>
+                    </tr>
+                </table>
+                
+                <p class="aln_c"><input type="button" name="" id="" value="上記の条件で検索する" class="mgb30" /></p>
+                
+                <div class="pagelink clearfix">
+                <ul class="year">
+                	<li><a href="">&lt;</a></li>
+                	<li><a href="">2010年1月</a></li>
+                    <li><span>2月</span></li>
+                	<li><a href="">3月</a></li>
+                	<li><a href="">4月</a></li>
+                	<li><a href="">5月</a></li>
+                	<li><a href="">6月</a></li>
+                	<li><a href="">7月</a></li>
+                	<li><a href="">8月</a></li>
+                	<li><a href="">9月</a></li>
+                	<li><a href="">10月</a></li>
+                	<li><a href="">11月</a></li>
+                	<li><a href="">12月</a></li>
+                	<li><a href="">&gt;</a></li>
+                </ul>
+                </div>
+                <table class="type02" summary="一覧">
+                	<tr>
+                   		<th class="w7">&nbsp;</th>
+                    	<th class="w13">ダウンロード</th>
+                    	<th class="w13">販売金額</th>
+                    	<th class="w13">決済手数料</th>
+                    	<th class="w15">売上</th>
+                    	<th class="w20">コンテンツ利用料（支払）</th>
+                    	<th class="w15">粗利益</th>
+                    	<th class="w4 aln_c end">内訳</th>
+                	</tr>
+                    <tr>
+                    	<td class="aln_r">1日</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">130000</td>
+                    	<td class="aln_c"><input type="button" name="" id="" value="表示" /></td>
+                    </tr>
+                    <tr>
+                    	<td class="aln_r">2日</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">130000</td>
+                    	<td class="aln_c"><input type="button" name="" id="" value="表示" /></td>
+                    </tr>
+                    <tr>
+                    	<td class="aln_r">合計</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">10</td>
+                    	<td class="aln_r">130000</td>
+                    	<td class="aln_c"><input type="button" name="" id="" value="表示" /></td>
+                    </tr>
+                
+                </table>
+
+                <div class="pagelink clearfix">
+                <ul class="year">
+                	<li><a href="">&lt;</a></li>
+                	<li><a href="">2010年1月</a></li>
+                    <li><span>2月</span></li>
+                	<li><a href="">3月</a></li>
+                	<li><a href="">4月</a></li>
+                	<li><a href="">5月</a></li>
+                	<li><a href="">6月</a></li>
+                	<li><a href="">7月</a></li>
+                	<li><a href="">8月</a></li>
+                	<li><a href="">9月</a></li>
+                	<li><a href="">10月</a></li>
+                	<li><a href="">11月</a></li>
+                	<li><a href="">12月</a></li>
+                	<li><a href="">&gt;</a></li>
+                </ul>
+                </div>
+        </div>
+        
+        </div>
+        <address class="cl">Copyright &copy;2010 menue All Rights Reserved.</address>
+    </div>
+
+</body>
+</html>
