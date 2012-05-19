@@ -1,81 +1,66 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8" />
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
 <meta name="loadmodule" content="Product.Seller.Save" error="admin/contents/seller/index.html" />
 <meta name="loadmodule" content="Product.Seller.Delete" error="admin/contents/seller/index.html" />
 <meta name="loadmodule" content="Product.Seller.Reset" />
-<meta name="loadmodule" content="Product.Seller.Detail" type="2" />
+<meta name="loadmodule" content="Product.Seller.Detail" />
 <meta name="loadmodule" content="Product.Seller.List" sort_key="order" />
 <!--{include file="admin/common/site_header.html"}-->
 <!--{assign var="function_name" value="販売会社"}-->
-<title><!--{$function_name}-->｜コンテンツ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<!--{assign var="function_home" value="/admin/contents/seller"}-->
+<!--{assign var="function_page" value="/index.html"}-->
+<title><!--{$function_name}-->｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
 </head>
-
 <body>
-<div id="wrap">
-	<!-- HEADER -->
-	<!--{include file="admin/common/header.html"}-->
-	<!-- HEADER END -->
-	<div id="contents">
-		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/contents/index.html">コンテンツ</a> &gt; <!--{$function_name}--></p>
-		<h2>【コンテンツ】<!--{$function_name}--></h2>
-		<!--{foreach from=$ERRORS item="error"}-->
-		<div><!--{$error|escape}--></div>
-		<!--{/foreach}-->
-		
-		<div class="inner pdt15 clearfix">
-			<form action="?" method="POST">
-			<table class="type03 mgb30" summary="サーチ">
-				<tr>
-					<input type="hidden" name="seller_id" value="<!--{$ATTRIBUTES.seller->seller_id}-->" />
-					<input type="hidden" name="create_time" value="<!--{$ATTRIBUTES.seller->create_time}-->" />
-					<th class="w7">ソート</th><td class="w20"><input type="text" name="sort_order" id="sort_order" value="<!--{$ATTRIBUTES.seller->sort_order}-->" /></td>
-					<th class="w7"><!--{$category_type_name}--></th><td><input type="text" name="seller_name" id="seller_name" class="long" value="<!--{$ATTRIBUTES.seller->seller_name}-->" /></td>
-					<td class="w7 aln_c"><input type="submit" name="save" id="save" value="登録" /><input type="submit" name="reset" id="reset" value="キャンセル" /></td>
-				</tr>
-			</table>
-			</form>
-			
-			<div class="pagelink clearfix">
-			<p class="total">トータル　<!--{$ATTRIBUTES.sellers|@count|number_format}-->件</p>
-			</div>
-			<form action="?" method="POST">
-			<input type="submit" name="delete" id="delete_top" value="チェックした<!--{$function_name}-->を削除" class="mgb10" onclick="return confirm('チェックした<!--{$function_name}-->を削除します。')" />
-			<table class="type02" summary="一覧">
-				<tr>
-					<th class="w4">&nbsp;</th>
-					<th class="w4">&nbsp;</th>
-					<th class="w9">ソート <a href="?order=sort_order">▲</a> <a href="?order=rev@sort_order">▼</a></th>
-					<th><!--{$function_name}--> <a href="?order=seller_name">▲</a> <a href="?order=rev@seller_name">▼</a></th>
-					<th class="w9">登録日 <a href="?order=create_time">▲</a> <a href="?order=rev@create_time">▼</a></th>
-					<th class="w9">更新日 <a href="?order=update_time">▲</a> <a href="?order=rev@update_time">▼</a></th>
-				</tr>
-				<!--{foreach from=$ATTRIBUTES.sellers key="index" item="seller"}-->
-				<tr>
-					<td class="aln_c"><input type="checkbox" name="seller_id[<!--{$seller->seller_id}-->]" value="<!--{$seller->seller_id}-->" /></td>
-					<td class="aln_c"><input type="button" name="edit_button" value="編集" onclick="location.href='?seller_id=<!--{$seller->seller_id}-->';" /></td>
-					<td class="aln_r"><!--{$seller->sort_order}--></td>
-					<td><!--{$seller->seller_name|escape}--></td>
-					<td class="aln_r"><!--{$seller->create_time}--></td>
-					<td class="aln_r"><!--{$seller->update_time}--></td>
-				</tr>
-				<!--{/foreach}-->
-			</table>
-			<input type="submit" name="delete" id="delete_bottom" value="チェックした<!--{$function_name}-->を削除" class="mgb10" onclick="return confirm('チェックした<!--{$function_name}-->を削除します。')" />
-			</form>
-			<p class="total">トータル　<!--{$ATTRIBUTES.sellers|@count|number_format}-->件</p>
-			</div>                
-		</div>
-	</div>
-	<!-- FOOTER -->
-	<!--{include file="admin/common/footer.html"}-->
-	<!-- FOOTER END -->
+<div data-role="page" class="type-interior"> 
+<div data-role="header">
+<!--{include file="admin/common/header.html"}-->
+</div> 
+<div data-role="content">
+<div class="content-secondary">
+<!--{include file="admin/common/menu_product.html"}-->
 </div>
+<div class="content-primary">
+<form action="<!--{base}--><!--{$function_home}--><!--{$function_page}-->" method="POST">
+<input type="hidden" name="seller_id" value="<!--{$ATTRIBUTES.seller->seller_id}-->" />
+<input type="hidden" name="create_time" value="<!--{$ATTRIBUTES.seller->create_time}-->" />
+<ul data-role="listview" data-inset="true">
+	<li data-role="fieldcontain">
+	<label for="sort_order">表示順</label>
+	<input type="text" name="sort_order" id="sort_order" data-mini="true" value="<!--{$ATTRIBUTES.seller->sort_order}-->" />
+	</li>
+	<li data-role="fieldcontain">
+	<label for="seller_name"><!--{$function_name}--></label>
+	<input type="text" name="seller_name" id="seller_name" data-mini="true" value="<!--{$ATTRIBUTES.seller->seller_name}-->" />
+	<div data-role="controlgroup" data-type="horizontal">
+	</li>
+	<li data-role="fieldcontain"><div data-role="controlgroup" data-type="horizontal">
+	<input type="submit" name="save" id="save" value="登録" />
+	<input type="submit" name="reset" id="reset" value="キャンセル" />
+	</div></li>
+</ul>
+</form>
+<ul data-role="listview" data-split-icon="delete" data-inset="true">
+	<li data-role="list-divider"><!--{$function_name}-->　<!--{$ATTRIBUTES.sellers|@count|number_format}-->件</li>
+	<!--{foreach from=$ATTRIBUTES.sellers key="index" item="seller"}-->
+	<li>
+		<a href="<!--{base}--><!--{$function_home}--><!--{$function_page}-->?seller_id=<!--{$seller->seller_id}-->">
+		<!--{$seller->seller_name|escape}-->
+		<p class="ui-li-aside">表示順：<!--{$seller->sort_order}--></p>
+		<p class="ui-li-desc">最終更新日時：<!--{$seller->update_time}--></p>
+		</a>
+		<a href="<!--{base}--><!--{$function_home}--><!--{$function_page}-->?delete=1&seller_id=<!--{$seller->seller_id}-->">削除</a>
+	</li>
+	<!--{/foreach}-->
+</ul>
+</div>       
 
+</div> 
+<div data-role="footer">
+<!--{include file="admin/common/footer.html"}-->
+</div> 
 </body>
 </html>

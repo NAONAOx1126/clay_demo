@@ -1,89 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8" />
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
 <!--{include file="admin/common/site_header.html"}-->
 <title>メインメニュー｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
 </head>
-
 <body>
-<div id="wrap">
-	<!-- HEADER -->
-	<!--{include file="admin/common/header.html"}-->
-	<!-- HEADER END -->
-	<div id="contents">
-		<p class="pankuzu">メインメニュー</p>
-		<h2>メインメニュー</h2>
-		<div class="inner clearfix">
-			<dl class="main">
-				<dt><span>コンテンツ</span></dt>
-				<dd class="sub">
-					  <ul>
-						<li><a href="/admin/contents/category/index.html">カテゴリ一覧</a></li>
-						<li><a href="/admin/contents/character/index.html">キャラクター一覧</a></li>
-						<li><a href="/admin/contents/keyword/index.html">キーワード一覧</a></li>
-						<li><a href="/admin/contents/flag/index.html">商品フラグ一覧</a></li>
-						<li><a href="/admin/contents/developer/index.html">メーカー一覧</a></li>
-						<li><a href="/admin/contents/seller/index.html">販売者一覧</a></li>
-						<li><a href="/admin/contents/product/index.html">商品一覧</a></li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="main">
-				<dt><span>顧客</span></dt>
-				<dd class="sub">
-					  <ul>
-						<li><a href="/admin/customer/contract/index.html">契約一覧</a></li>
-						<li><a href="/admin/customer/customer/index.html">顧客一覧</a></li>
-						<li><a href="/admin/customer/ticket/index.html">問い合わせ一覧</a></li>
-						<li><a href="/admin/customer/advertise/index.html">広告分析設定</a></li>
-						<li><a href="/admin/customer/advertise/result.html">広告分析</a></li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="main">
-				<dt><span>売上</span></dt>
-				<dd class="sub">
-					<ul>
-						<li><a href="/admin/sales/order/index.html">購入一覧</a></li>
-						<li><a href="/admin/sales/sales/index.html">期間売上サマリ</a></li>
-						<li><a href="/admin/sales/time/index.html">購入時間帯サマリ</a></li>
-						<li><a href="/admin/sales/category/index.html">カテゴリ別サマリ</a></li>
-						<li><a href="/admin/sales/product/index.html">商品別サマリ</a></li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="main">
-				<dt><span>ページ</span></dt>
-				<dd class="sub">
-					<ul>
-						<li><a href="/admin/page/news/index.html">新着情報一覧</a></li>
-						<li><a href="/admin/page/cover/index.html">カバー画像一覧</a></li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="main">
-				<dt><span>システムメンテ</span></dt>
-				<dd class="sub">
-					  <ul>
-						<li><a href="/admin/system/site/index.html">サイト</a></li>
-						<li><a href="/admin/system/company/index.html">管理組織／オペレータ</a></li>
-						<li><a href="/admin/system/email/index.html">メールテンプレート</a></li>
-						<li><a href="/admin/system/domain/index.html">モバイルドメイン</a></li>
-						<li><a href="/admin/system/zip/index.html">郵便番号／都道府県</a></li>
-						<li><a href="/admin/system/update/index.html">システムアップデート</a></li>
-					</ul>
-				</dd>
-			</dl>
-		</div>
-	</div>
-	<!-- FOOTER -->
-	<!--{include file="admin/common/footer.html"}-->
-	<!-- FOOTER END -->
-</div>
+<div data-role="page"> 
+<div data-role="header">
+<!--{include file="admin/common/header.html"}-->
+</div> 
+<div data-role="content">
+説明が入ります。
+</div> 
+<div data-role="footer">
+<!--{include file="admin/common/footer.html"}-->
+</div> 
 </body>
 </html>

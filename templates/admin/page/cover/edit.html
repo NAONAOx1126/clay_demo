@@ -29,15 +29,15 @@ $(function(){
 		<div class="inner pdt15 clearfix">
 			<form action="edit.html" method="POST" enctype="multipart/form-data">
 			<h3>カバー画像情報</h3>
-			<input type="hidden" name="cover_id" value="<!--{$smarty.post.cover_id|default:$ATTRIBUTES.cover->cover_id}-->" />
+			<input type="hidden" name="cover_id" value="<!--{$ATTRIBUTES.cover->cover_id|input:"cover_id"}-->" />
 			<table class="type01 mgb30" summary="登録">
 				<tr>
 					<th>表示順<span class="note">*必須</span></th>
-					<td colspan="3"><input type="text" name="sort_order" id="sort_order" class="middle" value="<!--{$smarty.post.sort_order|default:$ATTRIBUTES.cover->sort_order}-->" /></td>
+					<td colspan="3"><input type="text" name="sort_order" id="sort_order" class="middle" value="<!--{$ATTRIBUTES.cover->sort_order|input:"sort_order"}-->" /></td>
 				</tr>
 				<tr>
 					<th>カバータイトル<span class="note">*必須</span></th>
-					<td colspan="3"><input type="text" name="cover_title" id="cover_title" class="middle" value="<!--{$smarty.post.cover_title|default:$ATTRIBUTES.cover->cover_title}-->" /></td>
+					<td colspan="3"><input type="text" name="cover_title" id="cover_title" class="middle" value="<!--{$ATTRIBUTES.cover->cover_title|input:"cover_title"}-->" /></td>
 				</tr>
 				<!--{assign var="image_titles" value=","|explode:"カバー画像"}-->
 				<!--{assign var="image_names" value=","|explode:"cover_image"}-->
@@ -47,9 +47,9 @@ $(function(){
 					<th><!--{$image_title}--></th>
 					<td>
 					<!--{if $smarty.post[$image_name] != "" || $ATTRIBUTES.cover->$image_name != ""}-->
-					<img src="<!--{$smarty.post[$image_name]|default:$ATTRIBUTES.cover->$image_name}-->">
+					<img src="<!--{$ATTRIBUTES.cover->$image_name|input:$image_name}-->">
 					<!--{/if}-->
-					<input type="hidden" name="<!--{$image_name}-->" value="<!--{$smarty.post[$image_name]|default:$ATTRIBUTES.product->$image_name}-->" />
+					<input type="hidden" name="<!--{$image_name}-->" value="<!--{$ATTRIBUTES.cover->$image_name|input:$image_name}-->" />
 					<input type="file" name="<!--{$image_name}-->" id="image_<!--{$image_name}-->" />
 					<input type="submit" name="upload[<!--{$image_name}-->]" id="upload_image_<!--{$image_name}-->" value="アップロード" />
 					</td>
@@ -57,15 +57,14 @@ $(function(){
 				<!--{/foreach}-->
 				<tr>
 					<th>カバーURL<span class="note">*必須</span></th>
-					<td colspan="3"><input type="text" name="cover_url" id="cover_url" class="middle" value="<!--{$smarty.post.cover_url|default:$ATTRIBUTES.cover->cover_url}-->" /></td>
+					<td colspan="3"><input type="text" name="cover_url" id="cover_url" class="middle" value="<!--{$ATTRIBUTES.cover->cover_url|input:"cover_url"}-->" /></td>
 				</tr>
 				<tr>
 					<th>表示期間</th>
 					<td colspan="3">
-						<input type="text" name="start_time" id="start_time" value="<!--{$smarty.post.start_time|default:$ATTRIBUTES.cover->start_time|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
-						<input type="button" value="クリア" onClick="$('#start_time').val('');" />
+						<input type="text" name="start_time" id="start_time" value="<!--{$ATTRIBUTES.cover->start_time|input:"start_time"|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
 						〜
-						<input type="text" name="end_time" id="end_time" value="<!--{$smarty.post.end_time|default:$ATTRIBUTES.cover->end_time|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
+						<input type="text" name="end_time" id="end_time" value="<!--{$ATTRIBUTES.cover->end_time|input:"end_time"|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
 						<input type="button" value="クリア" onClick="$('#end_time').val('');" />
 					</td>
 				</tr>

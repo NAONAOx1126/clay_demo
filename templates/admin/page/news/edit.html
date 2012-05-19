@@ -46,7 +46,6 @@ $(function(){
 					<th>表示期間</th>
 					<td colspan="3">
 						<input type="text" name="start_time" id="start_time" value="<!--{$smarty.post.start_time|default:$ATTRIBUTES.news->start_time|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
-						<input type="button" value="クリア" onClick="$('#start_time').val('');" />
 						〜
 						<input type="text" name="end_time" id="end_time" value="<!--{$smarty.post.end_time|default:$ATTRIBUTES.news->end_time|date_format:"%Y-%m-%d %H:%M"}-->" size="20" readonly="readonly">
 						<input type="button" value="クリア" onClick="$('#end_time').val('');" />

@@ -1,44 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
-<meta name="loadmodule" content="Shopping.Admin.Login" error="admin/login.html" />
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
 <!--{include file="admin/common/site_header.html"}-->
-<title>コンテンツ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<title>商品｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
 </head>
-
 <body>
-<div id="wrap">
-	<!-- HEADER -->
-	<!--{include file="admin/common/header.html"}-->
-	<!-- HEADER END -->
-	<div id="contents">
-		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; コンテンツ</p>
-		<h2>コンテンツ管理メニュー</h2>
-
-		<div class="inner clearfix">
-			<div>配信コンテンツおよび、そのカテゴリ情報などを管理する機能です。</div>
-			<dl class="main">
-				<dd class="sub">
-					<ul>
-						<li><a href="/admin/contents/category/index.html">カテゴリ一覧</a></li>
-						<li><a href="/admin/contents/character/index.html">キャラクター一覧</a></li>
-						<li><a href="/admin/contents/keyword/index.html">キーワード一覧</a></li>
-						<li><a href="/admin/contents/flag/index.html">商品フラグ一覧</a></li>
-						<li><a href="/admin/contents/developer/index.html">メーカー一覧</a></li>
-						<li><a href="/admin/contents/seller/index.html">販売者一覧</a></li>
-						<li><a href="/admin/contents/product/index.html">商品一覧</a></li>
-					</ul>
-				</dd>
-			</dl>
-		</div>
-	</div>
-	<!-- FOOTER -->
-	<!--{include file="admin/common/footer.html"}-->
-	<!-- FOOTER END -->
-</div>
+<div data-role="page"> 
+<div data-role="header">
+<!--{include file="admin/common/header.html"}-->
+</div> 
+<div data-role="content">
+<!--{include file="admin/common/menu_product.html"}-->
+</div> 
+<div data-role="footer">
+<!--{include file="admin/common/footer.html"}-->
+</div> 
 </body>
 </html>
