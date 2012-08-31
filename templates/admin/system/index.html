@@ -1,43 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
-<meta name="loadmodule" content="Shopping.Admin.Login" error="admin/login.html" />
-<!--{include file="admin/common/site_header.html"}-->
-<title>システムメンテ｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<!--{include file="admin/common/header.html"}-->
 </head>
-
 <body>
-<div id="wrap">
-	<!-- HEADER -->
-	<!--{include file="admin/common/header.html"}-->
-	<!-- HEADER END -->
-	<div id="contents">
-		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; システムメンテ</p>
-		<h2>システムメンテナンスメニュー</h2>
-
-		<div class="inner clearfix">
-			<div>ベースシステムの根幹部分を管理するための機能です。</div>
-			<dl class="main">
-				<dd class="sub">
-					<ul>
-						<li><a href="system/site/index.html">サイト</a></li>
-						<li><a href="system/company/index.html">管理組織／オペレータ</a></li>
-						<li><a href="system/email/index.html">メールテンプレート</a></li>
-						<li><a href="system/domain/index.html">モバイルドメイン</a></li>
-						<li><a href="system/zip/index.html">郵便番号／都道府県</a></li>
-						<li><a href="system/update/index.html">システムアップデート</a></li>
-					</ul>
-				</dd>
-			</dl>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_system.html"}-->
+			</div>
+			<!--/.well -->
 		</div>
+		<!--/span-->
+		<div class="span9"> 
+		</div>
+		<!--/span-->
 	</div>
-	<!-- FOOTER -->
+	<!--/row-->
+	<hr>
 	<!--{include file="admin/common/footer.html"}-->
-	<!-- FOOTER END -->
 </div>
 </body>
 </html>

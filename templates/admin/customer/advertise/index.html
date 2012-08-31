@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Content.Advertise.Delete" error="admin/customer/advertise/index.html" />
+<meta name="loadmodule" content="Content.Advertise.Detail" />
+<meta name="loadmodule" content="Content.Advertise.List" />
+<!--{include file="admin/common/header.html"}-->
+<link rel="stylesheet" href="<!--{base}-->/admin/css/datepicker.css" />
+<script type="text/javascript" src="<!--{base}-->/admin/js/bootstrap-datepicker_ja.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	// 必要に応じて初期値を設定
+	$("#advertise_start_time").attr("data-date", "<!--{$ATTRIBUTES.advertise->advertise_start_time|input:"advertise_start_time"|default:$smarty.now|date_format:"%Y-%m-%d %H:%M"}-->");
+	$("#advertise_end_time").attr("data-date", "<!--{$ATTRIBUTES.advertise->advertise_end_time|input:"advertise_end_time"|default:$smarty.now|date_format:"%Y-%m-%d %H:%M"}-->");
+	$("div.date").datepicker().on("changeDate", function(ev){
+		$("div.datepicker.dropdown-menu").hide();
+	});
+});
+</script>
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_customer.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<form class="well" action="complete.html" method="POST">
+			<input type="hidden" name="contract_id" value="<!--{$ATTRIBUTES.contract->contract_id}-->" />
+			<input type="hidden" name="create_time" value="<!--{$ATTRIBUTES.contract->create_time}-->" />
+			<table class="table table-bordered" summary="サーチ">
+				<tr>
+					<th>広告コード</th>
+					<td>
+					キー：<input type="text" name="advertise_key" id="advertise_key" class="input-medium" value="<!--{$ATTRIBUTES.advertise->advertise_key|input:"advertise_key"}-->">&nbsp;
+					コード：<input type="text" name="advertise_code" id="advertise_code" class="input-medium" value="<!--{$ATTRIBUTES.advertise->advertise_code|input:"advertise_code"}-->">
+					</td>
+					<th>広告金額</th>
+					<td><input type="text" name="advertise_price" id="advertise_price" class="input-small" value="<!--{$ATTRIBUTES.advertise->advertise_price|input:"advertise_price"}-->"><span class="add-on">円</span></td>
+				</tr>
+				<tr>
+					<th>適用期間</th>
+					<td>
+					<div class="controls">
+					<div id="advertise_start_time" class="input-append date" data-date="" data-date-format="yyyy-mm-dd">
+					<input name="advertise_start_time" type="date" class="input-medium" />
+					<span class="add-on"><i class="icon-calendar"></i></span>
+					</div>
+					〜
+					<div id="advertise_end_time" class="input-append date" data-date="" data-date-format="yyyy-mm-dd">
+					<input name="advertise_end_time" type="date" class="input-medium" />
+					<span class="add-on"><i class="icon-calendar"></i></span>
+					</div>
+					</div>
+					</td>
+					<th>広告名</th>
+					<td><input type="text" name="advertise_name" id="advertise_name" class="input-long" value="<!--{$ATTRIBUTES.advertise->advertise_name|input:"advertise_name"}-->"></td>
+				</tr>
+			</table>
+			<div class="form_actions"><input type="submit" name="save" id="save" value="登録する" class="btn btn-primary" /></div>
+			</form>
+			<table class="table table-bordered table-striped" summary="一覧">
+				<tr>
+					<th class="blue header">広告コード</th>
+					<th class="blue header">広告名</th>
+					<th class="blue header">広告金額</th>
+					<th class="blue header">適用期間</th>
+					<th class="blue header">削除</th>
+				</tr>
+				<!--{foreach from=$ATTRIBUTES.advertises key="header" item="data"}-->
+				<tr>
+					<td><!--{$data->advertise_key}-->=<!--{$data->advertise_code}--></td>
+					<td><!--{$data->advertise_name}--></td>
+					<td><!--{$data->advertise_price|number_format}--></td>
+					<td><!--{$data->advertise_start_time|date_format:"%Y/%m/%d"}-->〜<!--{$data->advertise_end_time|date_format:"%Y/%m/%d"}--></td>
+					<td><a href="index.html?delete=1&advertise_id=<!--{$data->advertise_id}-->" onClick="return confirm('削除します。よろしいですか？')" class="btn btn-danger">削除</a></td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>

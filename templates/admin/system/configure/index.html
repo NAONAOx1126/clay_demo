@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Base.Configure.List" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_system.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<!--{assign var="site" value=$ATTRIBUTES.site}-->
+			<form class="well" action="complete.html" method="POST" enctype="multipart/form-data">
+			<input type="hidden" name="site_id" value="<!--{$site->site_id}-->" />
+			<table class="table table-bordered" summary="登録">
+            <tr>
+            	<th>サイトコード<span class="note">*必須</span></th>
+                <td><input type="text" name="site_code" id="site_code" value="<!--{$site->site_code}-->" class="input_medium" /></td>
+                <th>サイトパスワード</th>
+                <td><input type="text" name="site_password" id="site_password" value="<!--{$site->site_password}-->" class="input_medium" /></td>
+            </tr>
+            <tr>
+                <th>サイト名</th>
+                <td><input type="text" name="site_name" id="site_name" value="<!--{$site->site_name}-->" class="input_long" /></td>
+                <th>ドメイン名</th>
+                <td><input type="text" name="domain_name" id="domain_name" value="<!--{$site->domain_name}-->" class="input_medium" /></td>
+            </tr>
+            <tr>
+                <th>ホームディレクトリ</th>
+                <td colspan="3"><input type="text" name="site_home" id="site_home" value="<!--{$site->site_home}-->" class="input-long" /></td>
+            </tr>
+           	</table>
+			<div class="form_actions"><input type="submit" name="save" id="save" class="btn btn-primary" value="登録する" /></div>
+            </form>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>

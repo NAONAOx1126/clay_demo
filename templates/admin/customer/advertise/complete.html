@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/index.html" />
+<meta name="loadmodule" content="Base.Checks.Required" key="advertise_key" value="広告キー" />
+<meta name="loadmodule" content="Base.Checks.Required" key="advertise_code" value="広告コード" />
+<meta name="loadmodule" content="Base.Pages.CheckError" error="admin/customer/advertise/index.html" />
+<meta name="loadmodule" content="Content.Advertise.Save" error="admin/customer/advertise/index.html" />
+<meta name="loadmodule" content="Base.Pages.ResetInput" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_customer.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			広告データを登録しました。
+			<div class="form_actions"><a href="index.html" class="btn btn-primary">広告一覧に戻る</a></div>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>

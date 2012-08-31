@@ -1,0 +1,18 @@
+<ul class="nav nav-list">
+<li class="nav-header">システム管理メニュー</li>
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/system/site/") === 0}-->
+<li class="active"><a href="/admin/system/site/index.html">サイト管理</a></li>
+<!--{else}-->
+<li><a href="/admin/system/site/index.html">サイト管理</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/system/company/") === 0}-->
+<li class="active"><a href="/admin/system/company/index.html">組織管理</a></li>
+<!--{else}-->
+<li><a href="/admin/system/company/index.html">組織管理</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/system/update/") === 0}-->
+<li class="active"><a href="/admin/system/update/index.html">システムアップデート</a></li>
+<!--{else}-->
+<li><a href="/admin/system/update/index.html">システムアップデート</a></li>
+<!--{/if}-->
+</ul>

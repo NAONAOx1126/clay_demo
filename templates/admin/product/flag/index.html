@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8" />
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Product.Flag.Delete" />
+<meta name="loadmodule" content="Product.Flag.List" sort_key="order" clear="1" />
+<!--{include file="admin/common/site_header.html"}-->
+<!--{assign var="function_name" value="商品フラグ"}-->
+<!--{assign var="function_home" value="/admin/contents/flag"}-->
+<!--{assign var="function_page" value="/index.html"}-->
+<title><!--{$function_name}-->｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+</head>
+<body>
+<div data-role="page" class="type-interior"> 
+<div data-role="header">
+<!--{include file="admin/common/header.html"}-->
+</div> 
+<div data-role="content">
+<div class="content-secondary">
+<!--{include file="admin/common/menu_product.html"}-->
+</div>
+<div class="content-primary">
+<a href="../../../admin/contents/flag/<!--{base}--><!--{$function_home}-->/edit.html" data-role="button" data-icon="plus">新規<!--{$function_name}-->登録</a>
+<ul data-role="listview" data-inset="true">
+	<li data-role="list-divider"><!--{$function_name}-->　<!--{$ATTRIBUTES.flags|@count|number_format}-->件</li>
+	<!--{foreach from=$ATTRIBUTES.flags key="index" item="flag"}-->
+	<li>
+		<a href="../../../admin/contents/flag/<!--{base}--><!--{$function_home}-->/edit.html?flag_id=<!--{$flag->flag_id}-->">
+		<!--{if $flag->flag_image_s != ""}--><img src="../../../admin/contents/flag/<!--{$flag->flag_image_s}-->" class="ui-li-thumb" width="80" /><!--{/if}-->
+		<!--{$flag->flag_text|escape}-->
+		<p class="ui-li-aside">表示順：<!--{$flag->sort_order}--></p>
+		<p class="ui-li-desc">最終更新日時：<!--{$flag->update_time}--></p>
+		</a>
+	</li>
+	<!--{/foreach}-->
+</ul>
+</div>       
+
+</div> 
+<div data-role="footer">
+<!--{include file="admin/common/footer.html"}-->
+</div> 
+</body>
+</html>

@@ -1,3 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/index.html" />
+<meta name="loadmodule" content="Base.System.Update" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_system.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			構成ファイルをアップデートしました。
+			<div class="form_actions"><a href="index.html" class="btn btn-primary">アップデートに戻る</a></div>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -17,7 +51,7 @@
 	<!--{include file="admin/common/header.html"}-->
 	<!-- HEADER END -->
 	<div id="contents">
-		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/contents/index.html">システムメンテ</a> &gt; <a href="/admin/contents/product/index.html">商品一覧</a> &gt; <!--{$function_name}--></p>
+		<p class="pankuzu"><a href="/admin3/index.html">メインメニュー</a> &gt; <a href="/admin3/contents/index.html">システムメンテ</a> &gt; <a href="/admin3/contents/product/index.html">商品一覧</a> &gt; <!--{$function_name}--></p>
 		<h2><!--{$function_name}-->完了</h2>
 		<div class="inner pdt15 clearfix">
 			<div><!--{$function_name}-->しました。</div>

@@ -1,0 +1,38 @@
+<ul class="nav nav-list">
+<li class="nav-header">商品管理メニュー</li>
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/product/category_type/") === 0}-->
+<li class="active"><a href="/admin/product/category_type/index.html">カテゴリ区分一覧</a></li>
+<!--{else}-->
+<li><a href="/admin/product/category_type/index.html">カテゴリ区分一覧</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/product/category_group/") === 0}-->
+<li class="active"><a href="/admin/product/category_group/index.html">カテゴリグループ一覧</a></li>
+<!--{else}-->
+<li><a href="/admin/product/category_group/index.html">カテゴリグループ一覧</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/product/category/") === 0}-->
+<li class="active"><a href="/admin/product/category/index.html">カテゴリ一覧</a></li>
+<!--{else}-->
+<li><a href="/admin/product/category/index.html">カテゴリ一覧</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/product/flag/") === 0}-->
+<li class="active"><a href="/admin/product/flag/index.html">フラグ一覧</a></li>
+<!--{else}-->
+<li><a href="/admin/product/flag/index.html">フラグ一覧</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/product/developer/") === 0}-->
+<li class="active"><a href="/admin/product/developer/index.html">開発元一覧</a></li>
+<!--{else}-->
+<li><a href="/admin/product/developer/index.html">開発元一覧</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/product/seller/") === 0}-->
+<li class="active"><a href="/admin/product/seller/index.html">販売業者一覧</a></li>
+<!--{else}-->
+<li><a href="/admin/product/seller/index.html">販売業者一覧</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/product/product/") === 0}-->
+<li class="active"><a href="/admin/product/product/index.html">商品一覧</a></li>
+<!--{else}-->
+<li><a href="/admin/product/product/index.html">商品一覧</a></li>
+<!--{/if}-->
+</ul>

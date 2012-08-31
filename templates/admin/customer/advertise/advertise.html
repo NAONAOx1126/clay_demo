@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Members.AdvertiseList" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_customer.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<!--{foreach from=$ATTRIBUTES.advertise key="title" item="advertise"}-->
+			<table class="table table-bordered table-striped" summary="一覧">
+				<tr>
+					<th class="blue header""><!--{$title}--></th>
+					<!--{foreach from=$ATTRIBUTES.points item="point"}-->
+					<th class="blue header"><!--{$point|number_format}--></th>
+					<!--{/foreach}-->
+				</tr>
+				<!--{foreach from=$advertise key="header" item="data"}-->
+				<tr>
+					<td>
+					<!--{if $data.link_key != ""}--><a href="advertise.html?<!--{$data.link_key}-->"><!--{$header}--></a>
+					<!--{else}--><!--{$header}--><!--{/if}-->
+					</td>
+					<!--{foreach from=$ATTRIBUTES.points item="point"}-->
+					<td><!--{$data[$point]|number_format}--></td>
+					<!--{/foreach}-->
+				</tr>
+				<!--{/foreach}-->
+			</table>
+			<!--{/foreach}-->
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>

@@ -1,67 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
-<!--{include file="admin/common/site_header.html"}-->
-<!--{assign var="function_name" value="顧客"}-->
-<title><!--{$function_name}-->｜顧客｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
-<script type="text/javascript">
-$(function(){
-	$("#sale_start").AnyTime_picker({ format: "%Y-%m-%d %H:%i" } );
-	$("#sale_end").AnyTime_picker({ format: "%Y-%m-%d %H:%i" } );
-});
-</script>
+<!--{include file="admin/common/header.html"}-->
 </head>
 <body>
-<div id="wrap">
-	<!-- HEADER -->
-	<!--{include file="admin/common/header.html"}-->
-	<!-- HEADER END -->
-	<div id="contents">
-		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/customer/index.html">顧客</a> &gt; <a href="/admin/customer/customer/index.html">顧客一覧</a> &gt; <!--{$function_name}--></p>
-		<h2><!--{$function_name}-->｜顧客｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</h2>
-		<div class="inner pdt15 clearfix">
-			<form action="complete.html" method="POST" enctype="multipart/form-data">
-			<h3>顧客基本情報</h3>
-			<input type="hidden" name="customer_id" value="<!--{$smarty.post.customer_id|default:$ATTRIBUTES.customer->customer_id}-->" />
-			<table class="type01 mgb30" summary="登録">
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_customer.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<form class="well" action="complete.html" method="POST" enctype="multipart/form-data">
+			<table class="table table-bordered" summary="登録">
 				<tr>
-					<th>顧客コード<span class="note">*必須</span></th>
+					<th>顧客コード</th>
 					<td><!--{$smarty.post.customer_code}--></td>
-					<th>端末ID<span class="note">*必須</span></th>
+					<th>端末ID</th>
 					<td><!--{$smarty.post.mobile_id}--></td>
-				</tr>
-				<tr>
+				</tr><tr>
 					<th>顧客名</th>
 					<td><!--{$smarty.post.sei}--> <!--{$smarty.post.mei}--></td>
 					<th>顧客名カナ</th>
 					<td><!--{$smarty.post.sei_kana}--> <!--{$smarty.post.mei_kana}--></td>
-				</tr>
-				<tr>
+				</tr><tr>
 					<th>メールアドレス</th>
-					<td colspan="3"><!--{$smarty.post.email}--></td>
-				</tr>
-				<tr>
-					<th>電話番号<span class="note">*必須</span></th>
-					<td><!--{$smarty.post.tel1}-->-<!--{$smarty.post.tel2}-->-<!--{$smarty.post.tel3}-->
-					</td>
-					<th>ポイント<span class="note">*必須</span></th>
-					<td><!--{$smarty.post.point}--></td>
+					<td><!--{$smarty.post.email}--></td>
+					<th>外部ID</th>
+					<td><!--{$smarty.post.external_id}--></td>
+				</tr><tr>
+					<th>電話番号</th>
+					<td><!--{$smarty.post.tel1}-->-<!--{$smarty.post.tel2}-->-<!--{$smarty.post.tel3}--></td>
+					<th>ポイント</th>
+					<td><!--{$smarty.post.point|number_format}-->pt</td>
 				</tr>
 			</table>
-			<p class="aln_c mgb30">
-			<input type="submit" name="save" id="save" value="上記の内容で登録する" />
-			</p>
+			<div class="form_actions"><input type="submit" name="save" id="save" class="btn btn-primary" value="登録内容を確認する" /></div>
 			</form>
 		</div>
+		<!--/span-->
 	</div>
-	<!-- FOOTER -->
+	<!--/row-->
+	<hr>
 	<!--{include file="admin/common/footer.html"}-->
-	<!-- FOOTER END -->
 </div>
 </body>
 </html>

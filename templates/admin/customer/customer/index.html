@@ -1,87 +1,68 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
 <meta name="loadmodule" content="Base.Pref.List" />
 <meta name="loadmodule" content="Member.Customer.Delete" />
 <meta name="loadmodule" content="Member.Customer.Page" clear="1" />
-<!--{include file="admin/common/site_header.html"}-->
-<!--{assign var="function_name" value="顧客"}-->
-<title><!--{$function_name}-->｜顧客｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<!--{include file="admin/common/header.html"}-->
 </head>
-
 <body>
-<div id="wrap">
-	<!-- HEADER -->
-	<!--{include file="admin/common/header.html"}-->
-	<!-- HEADER END -->
-	<div id="contents">
-		<!--{assign var="product_links" value=$ATTRIBUTES.customers_pager->getLinks()}-->
-		<p class="pankuzu"><a href="/admin/index.html">メインメニュー</a> &gt; <a href="/admin/customer/index.html">顧客</a> &gt; <!--{$function_name}--></p>
-		<h2>【コンテンツ】<!--{$function_name}--></h2>
-		<!--{foreach from=$ERRORS item="error"}-->
-		<div><!--{$error|escape}--></div>
-		<!--{/foreach}-->
-		
-		<div class="inner pdt15 clearfix">
-			<form action="?" method="GET">
-			<table class="type03" summary="サーチ">
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_customer.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<form class="well form-search" action="index.html" method="GET">
+			<table class="table table-bordered" summary="サーチ">
 				<tr>
-					<th><!--{$function_name}-->名</th><td><input type="text" name="search[part:sei+mei]" id="search_name" value="<!--{$smarty.post.search["part:sei+mei"]}-->" /></td>
-					<th><!--{$function_name}-->名カナ</th><td><input type="text" name="search[part:sei_kana+mei_kana]" id="search_name_kana" value="<!--{$smarty.post.search["part:sei_kana+mei_kana"]}-->" /></td>
+					<th>顧客名</th><td><input type="text" class="input-medium search-query" name="search[part:sei+mei]" id="search_name" value="<!--{$smarty.post.search["part:sei+mei"]}-->" /></td>
+					<th>顧客名カナ</th><td><input type="text" class="input-medium search-query" name="search[part:sei_kana+mei_kana]" id="search_name_kana" value="<!--{$smarty.post.search["part:sei_kana+mei_kana"]}-->" /></td>
 				</tr>
 				<tr>
-					<th>メールアドレス</th><td><input type="text" name="search[part:email]" id="search_email" value="<!--{$smarty.post.search["part:email"]}-->" /></td>
-					<th>電話番号</th><td><input type="text" name="search[part:tel1+tel2+tel3]" id="search_tel" value="<!--{$smarty.post.search["part:tel1+tel2+tel3"]}-->" /></td>
+					<th>メールアドレス</th><td><input type="text" class="input-long search-query" name="search[part:email]" id="search_email" value="<!--{$smarty.post.search["part:email"]}-->" /></td>
+					<th>電話番号</th><td><input type="text" class="input-medium search-query" name="search[part:tel1+tel2+tel3]" id="search_tel" value="<!--{$smarty.post.search["part:tel1+tel2+tel3"]}-->" /></td>
 				</tr>
 			</table>
-			<p class="aln_c"><input type="submit" name="" id="" value="上記の条件で検索する" class="mgb30" /></p>
+			<div class="form_actions"><input type="submit" name="" id="" value="上記の条件で検索する" class="btn btn-primary" /></div>
 			</form>
-			
-			<div class="pagelink clearfix">
-			<!--{$product_links.all}--><br />
-			<p class="total">トータル　<!--{$ATTRIBUTES.customers_pager->numItems()|number_format}-->件</p>
-			</div>
-			<table class="type02" summary="一覧">
+			<table class="table table-bordered table-striped" summary="一覧">
 				<tr>
-					<th class="w4">詳細</th>
-					<th class="w7">顧客コード<br /><a href="?order=customer_code">▲</a> <a href="?order=rev@customer_code">▼</a></th>
-					<th class="w7">顧客名<br /><a href="?order=sei">▲</a> <a href="?order=rev@sei">▼</a></th>
-					<th class="w7">顧客名カナ</th>
-					<th class="w20">メールアドレス<br /><a href="?order=email">▲</a> <a href="?order=rev@email">▼</a></th>
-					<th class="w4">端末ID</th>
-					<th class="w4">電話番号</th>
-					<th class="w9">登録日<br /><a href="index.html?order=create_time">▲</a> <a href="index.html?order=rev@create_time">▼</a></th>
-					<th class="w9 end">更新日<br /><a href="index.html?order=update_time">▲</a> <a href="index.html?order=rev@update_time">▼</a></th>
+					<th class="blue header">詳細</th>
+					<th class="blue header">顧客コード</th>
+					<th class="blue header">顧客名</th>
+					<th class="blue header">メールアドレス</th>
+					<th class="blue header">端末ID</th>
+					<th class="blue header">外部ID</th>
+					<th class="blue header">電話番号</th>
 				</tr>
 				<!--{foreach from=$ATTRIBUTES.customers key="index" item="customer"}-->
 				<tr>
-					<td class="aln_c"><input type="button" name="detail" id="detail_<!--{$product->product_id}-->" value="詳細" onclick="location.href='edit.html?customer_id=<!--{$customer->customer_id}-->'" /></td>
-					<td class="aln_c"><!--{$customer->customer_code}--></td>
+					<td><input type="button" name="detail" id="detail_<!--{$product->product_id}-->" class="btn" value="詳細" onclick="location.href='edit.html?customer_id=<!--{$customer->customer_id}-->'" /></td>
+					<td><!--{$customer->customer_code}--></td>
 					<td><!--{$customer->sei}--> <!--{$customer->mei}--></td>
-					<td><!--{$customer->sei_kana}--> <!--{$customer->mei_kana}--></td>
 					<td><!--{$customer->email}--></td>
 					<td><!--{$customer->mobile_id}--></td>
-					<td class="aln_c"><!--{$customer->tel1}--><!--{$customer->tel2}--><!--{$customer->tel3}--></td>
-					<td class="aln_r"><!--{$customer->create_time|date_format:"%y/%m/%d"}--></td>
-					<td class="aln_r"><!--{$customer->update_time|date_format:"%y/%m/%d"}--></td>
+					<td><!--{$customer->external_id}--></td>
+					<td><!--{$customer->tel1}--><!--{$customer->tel2}--><!--{$customer->tel3}--></td>
 				</tr>
 				<!--{/foreach}-->
 			</table>
-			
-			<div class="pagelink clearfix">
-			<!--{$product_links.all}--><br />
-			<p class="total">トータル　<!--{$ATTRIBUTES.customers_pager->numItems()|number_format}-->件</p>
-			</div>
 		</div>
+		<!--/span-->
 	</div>
-	<!-- FOOTER -->
+	<!--/row-->
+	<hr>
 	<!--{include file="admin/common/footer.html"}-->
-	<!-- FOOTER END -->
 </div>
 </body>
 </html>
