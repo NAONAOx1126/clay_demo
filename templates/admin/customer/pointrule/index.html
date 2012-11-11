@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Member.PointRule.Delete" />
+<meta name="loadmodule" content="Member.PointRule.Page" clear="1" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_customer.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<div><a href="edit.html" class="btn">新規登録</a></div>
+			<div id="pagelink"><!--{$ATTRIBUTES.point_rules_pager->getPageLink()}--><p class="total">全<!--{$ATTRIBUTES.point_rules_pager->getDataSize()|number_format}-->件</p></div>
+			<table class="table table-bordered table-striped" summary="一覧">
+				<tr>
+					<th class="blue header">詳細</th>
+					<th class="blue header">ルール名</th>
+					<th class="blue header">ルール</th>
+					<th class="blue header">ルール適用範囲</th>
+					<th class="blue header">付与ポイント</th>
+					<th class="blue header">適用期間</th>
+					<th class="blue header">反映</th>
+				</tr>
+				<!--{foreach from=$ATTRIBUTES.point_rules key="index" item="point_rule"}-->
+				<tr>
+					<td><a href="edit.html?point_rule_id=<!--{$point_rule->point_rule_id}-->" class="btn">詳細</a></td>
+					<td><!--{$point_rule->point_rule_name}--></td>
+					<td><!--{$point_rule->getRuleName($point_rule->point_rule)}--></td>
+					<td><!--{$point_rule->point_rule_min|number_format}-->〜<!--{$point_rule->point_rule_max|number_format}--></td>
+					<td><!--{$point_rule->add_point|number_format}-->pt／<!--{$point_rule->add_point_rate|number_format}-->%</td>
+					<td><!--{$point_rule->point_rule_start_time|date_format:"%Y/%m/%d"}-->〜<!--{$point_rule->point_rule_end_time|date_format:"%Y/%m/%d"}--></td>
+					<td><!--{if $point_rule->point_delay_flg == "1"}-->翌日反映<!--{else}-->即時反映<!--{/if}--></td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>

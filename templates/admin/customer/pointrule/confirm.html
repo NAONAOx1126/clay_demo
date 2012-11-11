@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Base.Checks.Required" key="point_rule_name" value="ポイントルール名" />
+<meta name="loadmodule" content="Base.Checks.Numbers" key="point_rule_min" value="ポイントルール適用範囲（下限）" />
+<meta name="loadmodule" content="Base.Checks.Numbers" key="point_rule_max" value="ポイントルール適用範囲（上限）" />
+<meta name="loadmodule" content="Base.Checks.Numbers" key="add_point" value="付与ポイント（固定）" />
+<meta name="loadmodule" content="Base.Checks.Numbers" key="add_point_rate" value="付与ポイント（百分率）" />
+<meta name="loadmodule" content="Base.Checks.Commit" error="admin/customer/pointrule/edit.html" />
+<meta name="loadmodule" content="Member.PointRule.Detail" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_customer.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<form class="well" action="complete.html" method="POST" enctype="multipart/form-data">
+			
+			<table class="table table-bordered" summary="登録">
+				<tr>
+					<th>ポイントルール名</th>
+					<td><!--{$smarty.post.point_rule_name}--></td>
+					<th>ポイントルール</th>
+					<td>
+					<!--{$ATTRIBUTES.point_rule->getRuleName($smarty.post.point_rule)}-->
+					／<!--{if $smarty.post.point_delay_flg == "1"}-->翌日反映<!--{else}-->即時反映<!--{/if}-->
+					</td>
+				</tr><tr>
+					<th>ポイントルール適用範囲</th>
+					<td><!--{$smarty.post.point_rule_min}-->〜<!--{$smarty.post.point_rule_max}--></td>
+					<th>付与ポイント</th>
+					<td><!--{$smarty.post.add_point|default:"0"|number_format}-->pt／<!--{$smarty.post.add_point_rate|default:"0"|number_format}-->%</td>
+				</tr><tr>
+					<th>適用期間</th>
+					<td colspan="3"><!--{$smarty.post.point_rule_start_time}-->〜<!--{$smarty.post.point_rule_end_time}--></td>
+				</tr>
+			</table>
+			<p class="aln_c mgb30">
+			<input type="submit" name="save" id="save" class="btn btn-primary" value="登録する" />
+			</p>
+			</form>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>
