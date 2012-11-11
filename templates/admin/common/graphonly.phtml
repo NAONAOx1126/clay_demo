@@ -1,0 +1,54 @@
+<!--{* list_title：リストのタイトル *}-->
+<!--{* list_suffix：リストのキーのサフィックス *}-->
+<!--{* list_column_type：リストの集計カラムのデータ種別 *}-->
+<!--{* list_column_name：リストの集計カラムのタイトル *}-->
+<!--{* list_column_suffix：リストの集計カラムのタイトルのサフィックス *}-->
+<!--{* list_column：リストの集計カラムのキー *}-->
+<!--{* list_column_end：キーが数値の場合の終端として加算する数値 *}-->
+<!--{* detail_link：詳細ページ用のリンクプレフィックス *}-->
+<td>
+<div id="order_sales<!--{$list_suffix}-->" style="width: 300px"></div>
+</td>
+<!--{assign var="list_key" value="orders`$list_suffix`"}-->
+<!--{assign var="totalUU" value="0"}-->
+<!--{assign var="totalCount" value="0"}-->
+<!--{assign var="totalPrice" value="0"}-->
+<!--{foreach from=$ATTRIBUTES[$list_key] item="order"}-->
+<!--{if is_array($order)}-->
+<!--{assign var="totalUU" value=$totalUU+$order.uu}-->
+<!--{assign var="totalCount" value=$totalCount+$order.count}-->
+<!--{assign var="totalPrice" value=$totalPrice+$order.subtotal}-->
+<!--{else}-->
+<!--{assign var="totalUU" value=$totalUU+$order->uu}-->
+<!--{assign var="totalCount" value=$totalCount+$order->count}-->
+<!--{assign var="totalPrice" value=$totalPrice+$order->subtotal}-->
+<!--{/if}-->
+<!--{/foreach}-->
+<!--{if $list_sub_column != ""}-->
+<!--{assign_summery var="summery" value=$ATTRIBUTES[$list_key] title=$list_column key="subtotal"}-->
+<script type="text/javascript">
+pieChart(
+	"order_sales<!--{$list_suffix}-->", 
+	"<!--{$list_title}-->", 
+	[<!--{foreach from=$summery key="index" item="order"}-->
+		<!--{if $index > 0}-->,<!--{/if}-->
+		["<!--{if $order[$list_column] != ""}--><!--{$order[$list_column]|escape}--><!--{$list_column_suffix}--><!--{if $list_column_end > 0}-->〜<!--{$order[$list_column]+$list_column_end|escape}--><!--{$list_column_suffix}--><!--{/if}--><!--{else}-->未設定<!--{/if}-->", <!--{$order.subtotal/$totalPrice*100|number_format:2}-->]
+	<!--{/foreach}-->]
+);
+</script>
+<!--{else}-->
+<script type="text/javascript">
+pieChart(
+	"order_sales<!--{$list_suffix}-->", 
+	"<!--{$list_title}-->", 
+	[<!--{foreach from=$ATTRIBUTES[$list_key] key="index" item="order"}-->
+		<!--{if $index > 0}-->,<!--{/if}-->
+		<!--{if is_array($order)}-->
+		["<!--{if $order[$list_column] != ""}--><!--{$order[$list_column]|escape}--><!--{$list_column_suffix}--><!--{if $list_column_end > 0}-->〜<!--{$order[$list_column]+$list_column_end|escape}--><!--{$list_column_suffix}--><!--{/if}--><!--{else}-->未設定<!--{/if}-->", <!--{$order.subtotal/$totalPrice*100|number_format:2}-->]
+		<!--{else}-->
+		["<!--{if $order->$list_column != ""}--><!--{$order->$list_column|escape}--><!--{$list_column_suffix}--><!--{if $list_column_end > 0}-->〜<!--{$order->$list_column+$list_column_end|escape}--><!--{$list_column_suffix}--><!--{/if}--><!--{else}-->未設定<!--{/if}-->", <!--{$order->subtotal/$totalPrice*100|number_format:2}-->]
+		<!--{/if}-->
+	<!--{/foreach}-->]
+);
+</script>
+<!--{/if}-->
