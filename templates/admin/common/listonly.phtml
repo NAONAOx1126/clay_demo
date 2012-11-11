@@ -1,0 +1,102 @@
+<!--{* list_title：リストのタイトル *}-->
+<!--{* list_suffix：リストのキーのサフィックス *}-->
+<!--{* list_column_type：リストの集計カラムのデータ種別 *}-->
+<!--{* list_column_name：リストの集計カラムのタイトル *}-->
+<!--{* list_column_suffix：リストの集計カラムのタイトルのサフィックス *}-->
+<!--{* list_column：リストの集計カラムのキー *}-->
+<!--{* detail_link：詳細ページ用のリンクプレフィックス *}-->
+<tr><th>
+<a name="<!--{$list_suffix|default:"_all"}-->"></a>
+<!--{$list_title}-->
+</th>
+<tr><td style="font-size: 8px">
+<!--{if $list_suffix == ""}-->
+新規＋リピート／<a href="#_new">新規</a>／<a href="#_repeat">リピート</a>
+<!--{elseif $list_suffix == "_new"}-->
+<a href="#_all">新規＋リピート</a>／新規／<a href="#_repeat">リピート</a>
+<!--{elseif $list_suffix == "_repeat"}-->
+<a href="#_all">新規＋リピート</a>／<a href="#_new">新規</a>／リピート
+<!--{/if}-->
+</td></tr>
+<!--{assign var="list_key" value="orders`$list_suffix`"}-->
+<tr><td>
+<div id="result">
+<!--{assign var="totalUU" value="0"}-->
+<!--{assign var="totalCount" value="0"}-->
+<!--{assign var="totalPrice" value="0"}-->
+<!--{foreach from=$ATTRIBUTES[$list_key] item="order"}-->
+<!--{if is_array($order)}-->
+<!--{assign var="totalUU" value=$totalUU+$order.uu}-->
+<!--{assign var="totalCount" value=$totalCount+$order.count}-->
+<!--{assign var="totalPrice" value=$totalPrice+$order.subtotal}-->
+<!--{else}-->
+<!--{assign var="totalUU" value=$totalUU+$order->uu}-->
+<!--{assign var="totalCount" value=$totalCount+$order->count}-->
+<!--{assign var="totalPrice" value=$totalPrice+$order->subtotal}-->
+<!--{/if}-->
+<!--{/foreach}-->
+<table id="result_table" class="table table-bordered table-striped">
+<thead>
+<tr class="tablesorter_header">
+<th class="blue header"><!--{$list_column_name}--></th>
+<!--{if $list_sub_column != ""}-->
+<th class="blue header"><!--{$list_sub_column_name}--></th>
+<!--{/if}-->
+<th class="blue header">購入者数</th><th class="blue header">売上個数</th><th class="blue header">売上個数比率</th>
+<th class="blue header">売上金額</th><th class="blue header">売上金額比率</th>
+<!--{if $detail_link != ""}-->
+<th class="none">&nbsp;</th>
+<!--{/if}-->
+</tr>
+</thead>
+<tbody>
+<!--{foreach from=$ATTRIBUTES[$list_key] item="order"}-->
+<!--{if is_array($order)}-->
+<tr>
+<th><!--{if $order[$list_column] != ""}--><!--{$order[$list_column]|escape}--><!--{$list_column_suffix}--><!--{else}-->未設定<!--{/if}--></th>
+<!--{if $list_sub_column != ""}-->
+<th><!--{if $order[$list_sub_column] != ""}--><!--{$order[$list_sub_column]|escape}--><!--{$list_column_suffix}--><!--{else}-->未設定<!--{/if}--></th>
+<!--{/if}-->
+<td style="text-align: right"><!--{$order.uu|number_format}-->名</td>
+<td style="text-align: right"><!--{$order.count|number_format}-->件</td>
+<td style="text-align: right"><!--{$order.count/$totalCount*100|number_format:2}-->%</td>
+<td style="text-align: right"><!--{$order.subtotal|number_format}-->円</td>
+<td style="text-align: right"><!--{$order.subtotal/$totalPrice*100|number_format:2}-->%</td>
+<!--{if $detail_link != ""}-->
+<td><a href="<!--{$detail_link}--><!--{$order[$list_column]}-->">詳細</a></td>
+<!--{/if}-->
+</tr>
+<!--{else}-->
+<tr>
+<th><!--{if $order->$list_column != ""}--><!--{$order->$list_column|escape}--><!--{$list_column_suffix}--><!--{else}-->未設定<!--{/if}--></th>
+<!--{if $list_sub_column != ""}-->
+<th><!--{if $order->$list_sub_column != ""}--><!--{$order->$list_sub_column|escape}--><!--{$list_sub_column_suffix}--><!--{else}-->未設定<!--{/if}--></th>
+<!--{/if}-->
+<td style="text-align: right"><!--{$order->uu|number_format}-->名</td>
+<td style="text-align: right"><!--{$order->count|number_format}-->件</td>
+<td style="text-align: right"><!--{$order->count/$totalCount*100|number_format:2}-->%</td>
+<td style="text-align: right"><!--{$order->subtotal|number_format}-->円</td>
+<td style="text-align: right"><!--{$order->subtotal/$totalPrice*100|number_format:2}-->%</td>
+<!--{if $detail_link != ""}-->
+<td><a href="<!--{$detail_link}--><!--{$order->$list_column}-->">詳細</a></td>
+<!--{/if}-->
+</tr>
+<!--{/if}-->
+<!--{/foreach}-->
+</tbody>
+<tfoot>
+<tr>
+<th<!--{if $list_sub_column != ""}--> colspan="2"<!--{/if}-->>合計</th>
+<td style="text-align: right"><!--{$totalUU|number_format}-->名</td>
+<td style="text-align: right"><!--{$totalCount|number_format}-->件</td>
+<td style="text-align: right">100.00%</td>
+<td style="text-align: right"><!--{$totalPrice|number_format}-->円</td>
+<td style="text-align: right">100.00%</td>
+<!--{if $detail_link != ""}-->
+<td>&nbsp;</td>
+<!--{/if}-->
+</tr>
+</tfoot>
+</table>
+</div>
+</td></tr>

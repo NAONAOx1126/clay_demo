@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<!--{base}-->/admin/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="<!--{base}-->/admin/css/jquery.jqplot.min.css" />
 <style>
 body {
 	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -7,6 +8,32 @@ body {
 <link rel="stylesheet" href="<!--{base}-->/admin/css/bootstrap-responsive.css" />
 <script type="text/javascript" src="<!--{base}-->/admin/js/jquery.min.js"></script>
 <script type="text/javascript" src="<!--{base}-->/admin/js/bootstrap.js"></script>
+<script type="text/javascript" src="<!--{base}-->/admin/js/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="<!--{base}-->/admin/js/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript">
+function setTerm(start, end){
+	$("#" + start).val($("#ge_order_time").val());
+	$("#" + end).val($("#le_order_time").val());
+}
+
+function pieChart(id, graphTitle, data){
+	$.jqplot(id, [data],{
+		title: graphTitle, 
+		seriesDefaults:{
+			renderer:$.jqplot.PieRenderer,
+			rendererOptions: {
+				showDataLabels: true
+			}
+		},
+		legend:{
+			show:true,
+			placement: "outsideGrid",
+			location: "s"
+		}
+	});
+}
+</script>
+
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="icon/favicon.ico">

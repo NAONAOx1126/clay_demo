@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Order.Summery.RepeaterOrder" title="order_type" summery="subtotal,total" order="subtotal" result="orders" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_sales.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<form name="download_excel" action="download.html" method="POST">
+			<input type="hidden" name="sort_key" value="order_type" />
+			<input type="hidden" id="download_ge_order_time" name="ge:order_time" />
+			<input type="hidden" id="download_le_order_time" name="le:order_time"  />
+			<div id="buttons"><input type="submit" name="download" value="集計データExcelダウンロード" onclick="$('#download_ge_order_time').val($('#ge_order_time').val()); $('#download_le_order_time').val($('#le_order_time').val());" /></div>
+			</form>
+			<!--{assign var="list_column_name" value="端末種別"}-->
+			<!--{assign var="list_column" value="order_type"}-->
+			<table id="result_list">
+			<!--{assign var="list_title" value="合計(新規+リピート)"}-->
+			<!--{assign var="list_suffix" value=""}-->
+			<!--{include file="admin/common/listonly.phtml"}-->
+			<!--{assign var="list_title" value="新規"}-->
+			<!--{assign var="list_suffix" value="_new"}-->
+			<!--{include file="admin/common/listonly.phtml"}-->
+			<!--{assign var="list_title" value="リピート"}-->
+			<!--{assign var="list_suffix" value="_repeat"}-->
+			<!--{include file="admin/common/listonly.phtml"}-->
+			</table>
+
+			<!--{assign var="list_column_name" value="端末種別"}-->
+			<!--{assign var="list_column" value="order_type"}-->
+			<!--{* 結果リスト *}-->
+			<table id="result_graph">
+			<tr>
+			<!--{assign var="list_title" value="合計(新規+リピート)"}-->
+			<!--{assign var="list_suffix" value=""}-->
+			<!--{include file="admin/common/graphonly.phtml"}-->
+			<!--{assign var="list_title" value="新規"}-->
+			<!--{assign var="list_suffix" value="_new"}-->
+			<!--{include file="admin/common/graphonly.phtml"}-->
+			</tr><tr>
+			<!--{assign var="list_title" value="リピート"}-->
+			<!--{assign var="list_suffix" value="_repeat"}-->
+			<!--{include file="admin/common/graphonly.phtml"}-->
+			<td></td>
+			</tr>
+			</table>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>

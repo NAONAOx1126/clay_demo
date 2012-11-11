@@ -1,0 +1,38 @@
+<ul class="nav nav-list">
+<li class="nav-header">売上管理メニュー</li>
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/sales/agent/") === 0}-->
+<li class="active"><a href="/admin/sales/agent/index.html">端末分析</a></li>
+<!--{else}-->
+<li><a href="/admin/sales/agent/index.html">端末分析</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/sales/prefecture/") === 0}-->
+<li class="active"><a href="/admin/sales/prefecture/index.html">都道府県分析</a></li>
+<!--{else}-->
+<li><a href="/admin/sales/prefecture/index.html">都道府県分析</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/sales/age/") === 0}-->
+<li class="active"><a href="/admin/sales/age/index.html">年代分析</a></li>
+<!--{else}-->
+<li><a href="/admin/sales/age/index.html">年代分析</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/sales/product/") === 0}-->
+<li class="active"><a href="/admin/sales/product/index.html">商品別分析</a></li>
+<!--{else}-->
+<li><a href="/admin/sales/product/index.html">商品別分析</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/sales/group/") === 0}-->
+<li class="active"><a href="/admin/sales/group/index.html">商品グループ別分析</a></li>
+<!--{else}-->
+<li><a href="/admin/sales/group/index.html">商品グループ別分析</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/sales/time/") === 0}-->
+<li class="active"><a href="/admin/sales/time/index.html">購入時間帯分析</a></li>
+<!--{else}-->
+<li><a href="/admin/sales/time/index.html">購入時間帯分析</a></li>
+<!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/sales/sample/") === 0}-->
+<li class="active"><a href="/admin/sales/sample/index.html">サンプル購入分析</a></li>
+<!--{else}-->
+<li><a href="/admin/sales/sample/index.html">サンプル購入分析</a></li>
+<!--{/if}-->
+</ul>

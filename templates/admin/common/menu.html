@@ -33,6 +33,11 @@
 					<!--{else}-->
 					<li><a href="/admin/order/index.html">受注</a></li>
 					<!--{/if}-->
+					<!--{if strpos($smarty.server.REQUEST_URI, "/admin/sales/") === 0}-->
+					<li class="active"><a href="/admin/sales/index.html">売上</a></li>
+					<!--{else}-->
+					<li><a href="/admin/sales/index.html">売上</a></li>
+					<!--{/if}-->
 					<!--{if strpos($smarty.server.REQUEST_URI, "/admin/content/") === 0}-->
 					<li class="active"><a href="/admin/content/index.html">ページ</a></li>
 					<!--{else}-->

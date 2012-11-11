@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Order.Summery.RepeaterOrder" title="order_type" summery="subtotal,total" order="subtotal" result="orders" />
+<meta name="loadmodule" content="File.Excel.CreateSheet" key="orders" sheet="合計(新規+リピート)" titles="端末種別,購入者数,受注件数,受注金額" columns="order_type,uu,count,subtotal" skip="1" />
+<meta name="loadmodule" content="File.Excel.CreateSheet" key="orders_new" sheet="新規" titles="端末種別,購入者数,受注件数,受注金額" columns="order_type,uu,count,subtotal" skip="1" />
+<meta name="loadmodule" content="File.Excel.CreateSheet" key="orders_repeat" sheet="リピート" titles="端末種別,購入者数,受注件数,受注金額" columns="order_type,uu,count,subtotal" skip="1" />
+<meta name="loadmodule" content="File.Excel.Download" file="端末分析" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_sales.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+		<h2>ダウンロードが完了しました。</h2>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>

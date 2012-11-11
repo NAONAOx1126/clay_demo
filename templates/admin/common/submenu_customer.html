@@ -20,6 +20,11 @@
 <!--{else}-->
 <li><a href="/admin/customer/ticket/index.html">問い合わせ一覧</a></li>
 <!--{/if}-->
+<!--{if strpos($smarty.server.REQUEST_URI, "/admin/customer/pointrule/") === 0}-->
+<li class="active"><a href="/admin/customer/pointrule/index.html">ポイントルール一覧</a></li>
+<!--{else}-->
+<li><a href="/admin/customer/pointrule/index.html">ポイントルール一覧</a></li>
+<!--{/if}-->
 <!--{if strpos($smarty.server.REQUEST_URI, "/admin/customer/advertise/") === 0}-->
 <li class="active"><a href="/admin/customer/advertise/index.html">広告分析設定</a></li>
 <!--{else}-->
