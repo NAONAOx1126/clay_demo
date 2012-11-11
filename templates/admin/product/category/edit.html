@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
-<meta name="loadmodule" content="Base.Company.Detail" />
-<meta name="loadmodule" content="Base.Pref.List" />
-<meta name="loadmodule" content="Base.Site.List" />
+<meta name="loadmodule" content="Product.Category.Type.List" />
+<meta name="loadmodule" content="Product.Category.Group.List" />
+<meta name="loadmodule" content="Product.Category.Detail" />
 <!--{include file="admin/common/header.html"}-->
 </head>
 <body>
@@ -16,58 +16,62 @@
 	<div class="row-fluid">
 		<div class="span3">
 			<div class="well sidebar-nav">
-			<!--{include file="admin/common/submenu_system.html"}-->
+			<!--{include file="admin/common/submenu_product.html"}-->
 			</div>
 			<!--/.well -->
 		</div>
 		<!--/span-->
 		<div class="span9"> 
-			<!--{assign var="company" value=$ATTRIBUTES.company}-->
+			<!--{assign var="category" value=$ATTRIBUTES.category}-->
 			<form class="well" action="complete.html" method="POST" enctype="multipart/form-data">
-			<input type="hidden" name="company_id" value="<!--{$company->company_id}-->" />
+			<input type="hidden" name="category_id" value="<!--{$category->category_id}-->" />
 			<table class="table table-bordered" summary="登録">
             <tr>
-            	<th>組織名</th>
-                <td><input type="text" name="company_name" id="site_code" value="<!--{$company->company_name}-->" class="input-medium" /></td>
-                <th>組織名カナ</th>
-                <td><input type="text" name="company_name_kana" id="company_name_kana" value="<!--{$company->company_name_kana}-->" class="input-medium" /></td>
-            </tr>
-            <tr>
-                <th>住所</th>
+            	<th>カテゴリ区分</th>
                 <td>
-				<input type="text" name="zip1" id="zip1" value="<!--{$company->zip1}-->" class="input-mini" maxlength="3" />
-				-<input type="text" name="zip2" id="zip2" value="<!--{$company->zip2}-->" class="input-mini" maxlength="4" /><br>
-				<select name="pref" id="pref">
-				<!--{foreach from=$ATTRIBUTES.prefs item="pref"}-->
-				<option value="<!--{$pref->id}-->"<!--{if $company->pref == $pref->id}--> selected<!--{/if}-->><!--{$pref->name}--></option>
-				<!--{/foreach}-->
-				</select><br>
-				<input type="text" name="address1" id="address1" value="<!--{$company->address1}-->" class="input-long" /><br>
-				<input type="text" name="address2" id="address2" value="<!--{$company->address2}-->" class="input-long" /><br>
-				</td>
-                <th>電話番号</th>
+					<select name="category_type_id">
+					<!--{foreach from=$ATTRIBUTES.category_types item="category_type"}-->
+					<option value="<!--{$category_type->category_type_id}-->"<!--{if $category->category_type_id == $category_type->category_type_id}--> selected<!--{/if}-->>
+					<!--{$category_type->category_type}-->
+					</option>
+					<!--{/foreach}-->
+					</select>
+                </td>
+                <th>カテゴリグループ</th>
                 <td>
-				<input type="text" name="tel1" id="tel1" value="<!--{$company->tel1}-->" class="input-mini" maxlength="6" />
-				-<input type="text" name="tel2" id="tel2" value="<!--{$company->tel2}-->" class="input-mini" maxlength="6" />
-				-<input type="text" name="tel3" id="tel3" value="<!--{$company->tel3}-->" class="input-mini" maxlength="6" />
+					<select name="category_group_id">
+					<option value="">選択なし</option>
+					<!--{foreach from=$ATTRIBUTES.category_groups item="category_group"}-->
+					<option value="<!--{$category_group->category_group_id}-->"<!--{if $category->category_group_id == $category_group->category_group_id}--> selected<!--{/if}-->>
+					<!--{$category_group->category_group}-->
+					</option>
+					<!--{/foreach}-->
+					</select>
                 </td>
             </tr>
             <tr>
-            	<th>メールアドレス</th>
-                <td><input type="text" name="email" id="email" value="<!--{$company->email}-->" class="input-long" /></td>
-                <th>URL</th>
-                <td><input type="text" name="url" id="url" value="<!--{$company->url}-->" class="input-long" /></td>
+            	<th>カテゴリコード</th>
+                <td><input type="text" name="category_code" id="category_code" value="<!--{$category->category_code}-->" class="input-long" /></td>
+                <th>カテゴリ名</th>
+                <td><input type="text" name="category_name" id="category_name" value="<!--{$category->category_name}-->" class="input-long" /></td>
             </tr>
             <tr>
-            	<th>サイト</th>
+            	<th>カテゴリ画像</th>
                 <td colspan="3">
-                <!--{foreach from=$ATTRIBUTES.sites item="site"}-->
-                <!--{if $smarty.session.OPERATOR.super_flg == 1 || $site->site_id == $CONFIGURE->site_id}-->
-                <input type="checkbox" name="site_id[]" value="<!--{$site->site_id}-->"<!--{if $company->hasSite($site->site_id)}--> checked<!--{/if}-->><!--{$site->site_name}-->&nbsp;
-                <!--{else}-->
-                <input type="hidden" name="site_id[]" value="<!--{$site->site_id}-->" />
-                <!--{/if}-->
-                <!--{/foreach}-->
+                <input type="hidden" name="category_image" id="category_image" value="<!--{$" class="input-long" />
+                <input type="file" name="upload[category_image]" id="upload_category_image" value="" class="input-long" />
+                <input type="submit" name="upload" values="アップロード" />
+                </td>
+            </tr>
+            <tr>
+            	<th>カテゴリ説明</th>
+                <td colspan="3">
+                <textarea name="description" id="description" class="span11" rows="5"><!--{$category->description}--></textarea>
+                </td>
+            </tr>
+            <tr>
+            	<th>表示順</th>
+                <td colspan="3"><input type="text" name="sort_order" id="sort_order" value="<!--{$category->sort_order}-->" class="input-mini" />
                 </td>
             </tr>
            	</table>

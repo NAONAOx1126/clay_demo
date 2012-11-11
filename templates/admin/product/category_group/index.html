@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
+<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Product.Category.Group.Delete" />
+<meta name="loadmodule" content="Product.Category.Group.List" />
+<!--{include file="admin/common/header.html"}-->
+</head>
+<body>
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_product.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+	    	<div class="form_actions"><a href="edit.html?category_group_id=" class="btn btn-success">新規カテゴリグループ登録</a></div>
+			<table class="table table-bordered table-striped" summary="一覧">
+				<tr>
+					<th class="blue header">詳細</th>
+					<th class="blue header">カテゴリグループ名</th>
+					<th class="blue header">並び順</th>
+				</tr>
+				<!--{foreach from=$ATTRIBUTES.category_groups key="index" item="category_group"}-->
+				<tr>
+					<td><input type="button" name="detail" id="detail_<!--{$category_group->category_group_id}-->" class="btn" value="詳細" onclick="location.href='edit.html?category_group_id=<!--{$category_group->category_group_id}-->'" /></td>
+					<td><!--{$category_group->category_group}--></td>
+					<td><!--{$category_group->sort_order}--></td>
+				</tr>
+				<!--{/foreach}-->
+			</table>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
+</div>
+</body>
+</html>

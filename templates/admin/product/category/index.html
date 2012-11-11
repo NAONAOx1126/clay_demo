@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
-<meta name="loadmodule" content="Product.Category.Types" />
+<meta name="loadmodule" content="Product.Category.Type.List" />
 <meta name="loadmodule" content="Product.Category.List" sort_key="order" />
 <!--{include file="admin/common/header.html"}-->
 </head>
@@ -25,11 +25,12 @@
 			<table class="table table-bordered" summary="サーチ">
 				<tr>
 					<th>カテゴリ区分</th><td>
-					<select name="category_type">
+					<select name="category_type_id">
 					<!--{foreach from=$ATTRIBUTES.category_types item="category_type"}-->
 					<option value="<!--{$category_type->category_type_id}-->"<!--{if $smarty.post.category_type == $category_type->category_type_id}--> selected<!--{/if}-->>
-					<!--{$category_type->category_type_name}-->
+					<!--{$category_type->category_type}-->
 					</option>
+					<!--{/foreach}-->
 					</select>
 					</td>
 					<td>
@@ -42,23 +43,21 @@
 			</form>
 			<table class="table table-bordered table-striped" summary="一覧">
 				<tr>
-					<th class="blue header">詳細</th>
-					<th class="blue header">来店番号</th>
-					<th class="blue header">来店日付</th>
-					<th class="blue header">会員番号</th>
-					<th class="blue header">メールアドレス</th>
-					<th class="blue header">購入金額</th>
+					<th class="blue header">カテゴリID</th>
+					<th class="blue header">カテゴリコード</th>
+					<th class="blue header">カテゴリグループ</th>
+					<th class="blue header">カテゴリ</th>
+					<th class="blue header">編集</th>
+					<th class="blue header">削除</th>
 				</tr>
-				<!--{foreach from=$ATTRIBUTES.welcomes key="index" item="welcome"}-->
+				<!--{foreach from=$ATTRIBUTES.categories key="index" item="category"}-->
 				<tr>
-					<!--{assign var="customer" value=$welcome->customer()}-->
-					<!--{assign var="order" value=$welcome->order()}-->
+					<td><!--{$category->category_id}--></td>
+					<td><!--{$category->category_code}--></td>
+					<td><!--{$category->group()->category_group}--></td>
+					<td><!--{$category->category_name}--></td>
 					<td><input type="button" name="detail" id="detail_<!--{$welcome->welcome_id}-->" class="btn" value="詳細" onclick="location.href='edit.html?welcome_id=<!--{$welcome->welcome_id}-->'" /></td>
-					<td><!--{"%010d"|sprintf:$welcome->welcome_id}--></td>
-					<td><!--{$welcome->welcome_date}--></td>
-					<td><!--{"%010d"|sprintf:$customer->customer_id}--></td>
-					<td><!--{$customer->email}--></td>
-					<td><!--{$order->total}--></td>
+					<td><input type="button" name="detail" id="detail_<!--{$welcome->welcome_id}-->" class="btn" value="詳細" onclick="location.href='edit.html?welcome_id=<!--{$welcome->welcome_id}-->'" /></td>
 				</tr>
 				<!--{/foreach}-->
 			</table>
@@ -69,77 +68,5 @@
 	<hr>
 	<!--{include file="admin/common/footer.html"}-->
 </div>
-</body>
-</html>
-
-
-<!DOCTYPE html> 
-<html> 
-<head> 
-<meta charset="UTF-8" />
-<meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
-<meta name="loadmodule" content="Product.Category.Save" error="admin/contents/category/index.html" />
-<meta name="loadmodule" content="Product.Category.Delete" error="admin/contents/category/index.html" />
-<meta name="loadmodule" content="Product.Category.Reset" />
-<meta name="loadmodule" content="Product.Category.Detail" type="1" />
-<meta name="loadmodule" content="Product.Category.List" type="1" sort_key="order" />
-<!--{include file="admin/common/site_header.html"}-->
-<!--{assign var="category_group_id" value="0"}-->
-<!--{assign var="category_type_id" value="1"}-->
-<!--{assign var="function_name" value="カテゴリ"}-->
-<!--{assign var="function_home" value="/admin/contents/category"}-->
-<!--{assign var="function_page" value="/index.html"}-->
-<title><!--{$function_name}-->｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
-</head>
-<body>
-<div data-role="page" class="type-interior"> 
-<div data-role="header" data-position="fixed">
-<!--{include file="admin/common/header.html"}-->
-</div> 
-<div data-role="content">
-<div class="content-secondary">
-<!--{include file="admin/common/menu_product.html"}-->
-</div>
-<div class="content-primary">
-<form action="../../../admin/contents/category/<!--{base}--><!--{$function_home}--><!--{$function_page}-->" method="POST">
-<input type="hidden" name="category_id" value="<!--{$ATTRIBUTES.category->category_id}-->" />
-<input type="hidden" name="category_group_id" value="<!--{$category_group_id}-->" />
-<input type="hidden" name="category_type_id" value="<!--{$category_type_id}-->" />
-<input type="hidden" name="create_time" value="<!--{$ATTRIBUTES.category->create_time}-->" />
-<ul data-role="listview" data-inset="true">
-	<li data-role="fieldcontain">
-	<label for="sort_order">表示順</label>
-	<input type="text" name="sort_order" id="sort_order" data-mini="true" value="<!--{$ATTRIBUTES.category->sort_order}-->" />
-	</li>
-	<li data-role="fieldcontain">
-	<label for="category_name"><!--{$function_name}--></label>
-	<input type="text" name="category_name" id="category_name" data-mini="true" value="<!--{$ATTRIBUTES.category->category_name}-->" />
-	<div data-role="controlgroup" data-type="horizontal">
-	</li>
-	<li data-role="fieldcontain"><div data-role="controlgroup" data-type="horizontal">
-	<input type="submit" name="save" id="save" value="登録" />
-	<input type="submit" name="reset" id="reset" value="キャンセル" />
-	</div></li>
-</ul>
-</form>
-<ul data-role="listview" data-split-icon="delete" data-inset="true">
-	<li data-role="list-divider"><!--{$function_name}-->　<!--{$ATTRIBUTES.categories|@count|number_format}-->件</li>
-	<!--{foreach from=$ATTRIBUTES.categories key="index" item="category"}-->
-	<li>
-		<a href="../../../admin/contents/category/<!--{base}--><!--{$function_home}--><!--{$function_page}-->?category_id=<!--{$category->category_id}-->">
-		<!--{$category->category_name|escape}-->
-		<p class="ui-li-aside">表示順：<!--{$category->sort_order}--></p>
-		<p class="ui-li-desc">最終更新日時：<!--{$category->update_time}--></p>
-		</a>
-		<a href="../../../admin/contents/category/<!--{base}--><!--{$function_home}--><!--{$function_page}-->?delete=1&category_id=<!--{$category->category_id}-->">削除</a>
-	</li>
-	<!--{/foreach}-->
-</ul>
-</div>       
-
-</div> 
-<div data-role="footer" data-position="fixed">
-<!--{include file="admin/common/footer.html"}-->
-</div> 
 </body>
 </html>
