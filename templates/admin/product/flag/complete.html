@@ -1,32 +1,34 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<meta charset="UTF-8" />
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/index.html" />
+<meta name="loadmodule" content="File.Image.Upload" reload="admin/product/flag/edit.html" />
 <meta name="loadmodule" content="Product.Flag.Save" />
-<!--{include file="admin/common/site_header.html"}-->
-<!--{assign var="function_name" value="商品フラグ"}-->
-<!--{assign var="function_home" value="/admin/contents/flag"}-->
-<!--{assign var="function_page" value="/complete.html"}-->
-<title><!--{$function_name}-->｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<!--{include file="admin/common/header.html"}-->
 </head>
 <body>
-<div data-role="page" class="type-interior"> 
-<div data-role="header">
-<!--{include file="admin/common/header.html"}-->
-</div> 
-<div data-role="content">
-<div class="content-secondary">
-<!--{include file="admin/common/menu_product.html"}-->
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_system.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			フラグ情報を登録しました。
+			<div class="form_actions"><a href="index.html" class="btn btn-primary">フラグ一覧に戻る</a></div>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
 </div>
-<div class="content-primary">
-<div>商品フラグを登録しました。</div>
-<a href="../../../admin/contents/flag/<!--{base}--><!--{$function_home}-->/index.html" data-role="button">商品フラグ一覧に戻る</a>
-</div>       
-
-</div> 
-<div data-role="footer">
-<!--{include file="admin/common/footer.html"}-->
-</div> 
 </body>
 </html>

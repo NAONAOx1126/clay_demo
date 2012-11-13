@@ -9,15 +9,6 @@
 <a name="<!--{$list_suffix|default:"_all"}-->"></a>
 <!--{$list_title}-->
 </th>
-<tr><td style="font-size: 8px">
-<!--{if $list_suffix == ""}-->
-新規＋リピート／<a href="#_new">新規</a>／<a href="#_repeat">リピート</a>
-<!--{elseif $list_suffix == "_new"}-->
-<a href="#_all">新規＋リピート</a>／新規／<a href="#_repeat">リピート</a>
-<!--{elseif $list_suffix == "_repeat"}-->
-<a href="#_all">新規＋リピート</a>／<a href="#_new">新規</a>／リピート
-<!--{/if}-->
-</td></tr>
 <!--{assign var="list_key" value="orders`$list_suffix`"}-->
 <tr><td>
 <div id="result">

@@ -21,6 +21,7 @@
 		</div>
 		<!--/span-->
 		<div class="span9"> 
+	    	<div class="form_actions"><a href="edit.html?category_id=" class="btn btn-success">新規カテゴリ登録</a></div>
 			<form class="well form-search" action="index.html" method="GET">
 			<table class="table table-bordered" summary="サーチ">
 				<tr>
@@ -48,7 +49,6 @@
 					<th class="blue header">カテゴリグループ</th>
 					<th class="blue header">カテゴリ</th>
 					<th class="blue header">編集</th>
-					<th class="blue header">削除</th>
 				</tr>
 				<!--{foreach from=$ATTRIBUTES.categories key="index" item="category"}-->
 				<tr>
@@ -56,8 +56,7 @@
 					<td><!--{$category->category_code}--></td>
 					<td><!--{$category->group()->category_group}--></td>
 					<td><!--{$category->category_name}--></td>
-					<td><input type="button" name="detail" id="detail_<!--{$welcome->welcome_id}-->" class="btn" value="詳細" onclick="location.href='edit.html?welcome_id=<!--{$welcome->welcome_id}-->'" /></td>
-					<td><input type="button" name="detail" id="detail_<!--{$welcome->welcome_id}-->" class="btn" value="詳細" onclick="location.href='edit.html?welcome_id=<!--{$welcome->welcome_id}-->'" /></td>
+					<td><input type="button" name="detail" id="detail_<!--{$category->category_id}-->" class="btn" value="詳細" onclick="location.href='edit.html?category_id=<!--{$category->category_id}-->'" /></td>
 				</tr>
 				<!--{/foreach}-->
 			</table>

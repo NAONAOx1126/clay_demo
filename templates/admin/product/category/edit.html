@@ -30,8 +30,9 @@
             	<th>カテゴリ区分</th>
                 <td>
 					<select name="category_type_id">
+					<!--{assign var="category_type_id" value=$category->category_type_id|input:"category_type_id"}-->
 					<!--{foreach from=$ATTRIBUTES.category_types item="category_type"}-->
-					<option value="<!--{$category_type->category_type_id}-->"<!--{if $category->category_type_id == $category_type->category_type_id}--> selected<!--{/if}-->>
+					<option value="<!--{$category_type->category_type_id}-->"<!--{if $category_type_id == $category_type->category_type_id}--> selected<!--{/if}-->>
 					<!--{$category_type->category_type}-->
 					</option>
 					<!--{/foreach}-->
@@ -41,8 +42,9 @@
                 <td>
 					<select name="category_group_id">
 					<option value="">選択なし</option>
+					<!--{assign var="category_group_id" value=$category->category_group_id|input:"category_group_id"}-->
 					<!--{foreach from=$ATTRIBUTES.category_groups item="category_group"}-->
-					<option value="<!--{$category_group->category_group_id}-->"<!--{if $category->category_group_id == $category_group->category_group_id}--> selected<!--{/if}-->>
+					<option value="<!--{$category_group->category_group_id}-->"<!--{if $category_group_id == $category_group->category_group_id}--> selected<!--{/if}-->>
 					<!--{$category_group->category_group}-->
 					</option>
 					<!--{/foreach}-->
@@ -51,31 +53,37 @@
             </tr>
             <tr>
             	<th>カテゴリコード</th>
-                <td><input type="text" name="category_code" id="category_code" value="<!--{$category->category_code}-->" class="input-long" /></td>
+                <td><input type="text" name="category_code" id="category_code" value="<!--{$category->category_code|input:"category_code"}-->" class="input-long" /></td>
                 <th>カテゴリ名</th>
-                <td><input type="text" name="category_name" id="category_name" value="<!--{$category->category_name}-->" class="input-long" /></td>
+                <td><input type="text" name="category_name" id="category_name" value="<!--{$category->category_name|input:"category_name"}-->" class="input-long" /></td>
             </tr>
             <tr>
             	<th>カテゴリ画像</th>
                 <td colspan="3">
-                <input type="hidden" name="category_image" id="category_image" value="<!--{$" class="input-long" />
-                <input type="file" name="upload[category_image]" id="upload_category_image" value="" class="input-long" />
-                <input type="submit" name="upload" values="アップロード" />
+                <img src="<!--{$category->category_image|input:"category_image"}-->" /><br />
+                <input type="hidden" name="category_image" id="category_image" value="<!--{$category->category_image|input:"category_image"}-->" />
+                <input type="file" name="category_image" id="upload_category_image" value="<!--{$category->category_image|input:"category_image"}-->" class="input-long" />
+                <input type="submit" name="upload[category_image]" value="アップロード" class="btn" />
                 </td>
             </tr>
             <tr>
             	<th>カテゴリ説明</th>
                 <td colspan="3">
-                <textarea name="description" id="description" class="span11" rows="5"><!--{$category->description}--></textarea>
+                <textarea name="description" id="description" class="span11" rows="5"><!--{$category->description|input:"description"}--></textarea>
                 </td>
             </tr>
             <tr>
             	<th>表示順</th>
-                <td colspan="3"><input type="text" name="sort_order" id="sort_order" value="<!--{$category->sort_order}-->" class="input-mini" />
+                <td colspan="3"><input type="text" name="sort_order" id="sort_order" value="<!--{$category->sort_order|input:"sort_order"}-->" class="input-mini" />
                 </td>
             </tr>
            	</table>
-			<div class="form_actions"><input type="submit" name="save" id="save" class="btn btn-primary" value="登録する" /></div>
+			<div class="form_actions">
+			<input type="submit" name="save" id="save" class="btn btn-primary" value="登録する" />
+			<!--{if $category->category_id > 0}-->
+			<input type="button" name="delete" id="delete" class="btn btn-danger" value="カテゴリを削除する" onclick="if(confirm('削除します。よろしいですか？')){ location.href = 'delete.html?delete=1&category_id=<!--{$category->category_id}-->'; }" />
+			<!--{/if}-->
+			</div>
             </form>
 		</div>
 		<!--/span-->

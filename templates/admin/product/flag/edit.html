@@ -1,63 +1,65 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<meta charset="UTF-8" />
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
 <meta name="loadmodule" content="Product.Flag.Detail" />
-<meta name="loadmodule" content="File.Image.Upload" />
-<!--{include file="admin/common/site_header.html"}-->
-<!--{assign var="function_name" value="商品フラグ"}-->
-<!--{assign var="function_home" value="/admin/contents/flag"}-->
-<!--{assign var="function_page" value="/edit.html"}-->
-<title><!--{$function_name}-->｜<!--{$smarty.server.CONFIGURE->site_name}-->管理画面</title>
+<!--{include file="admin/common/header.html"}-->
 </head>
 <body>
-<div data-role="page" class="type-interior"> 
-<div data-role="header">
-<!--{include file="admin/common/header.html"}-->
-</div> 
-<div data-role="content">
-<div class="content-secondary">
-<!--{include file="admin/common/menu_product.html"}-->
+<!--{include file="admin/common/menu.html"}-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+			<!--{include file="admin/common/submenu_product.html"}-->
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+		<div class="span9"> 
+			<!--{assign var="flag" value=$ATTRIBUTES.flag}-->
+			<form class="well" action="complete.html" method="POST" enctype="multipart/form-data">
+			<input type="hidden" name="category_type_id" value="<!--{$category_type->category_type_id}-->" />
+			<table class="table table-bordered" summary="登録">
+            <tr>
+            	<th>フラグ画像</th>
+                <td>
+                <img src="<!--{$flag->flag_image|input:"flag_image"}-->" /><br />
+                <input type="hidden" name="flag_image" id="flag_image" value="<!--{$flag->flag_image|input:"flag_image"}-->" />
+                <input type="file" name="flag_image" id="upload_flag_image" value="<!--{$flag->flag_image|input:"flag_image"}-->" class="input-medium" />
+                <input type="submit" name="upload[flag_image]" value="アップロード" class="btn" />
+                </td>
+                <th>フラグアイコン</th>
+                <td>
+                <img src="<!--{$flag->flag_image|input:"flag_image_s"}-->" /><br />
+                <input type="hidden" name="flag_image_s" id="flag_image_s" value="<!--{$flag->flag_image_s|input:"flag_image_s"}-->" />
+                <input type="file" name="flag_image_s" id="upload_flag_image_s" value="<!--{$flag->flag_image_s|input:"flag_image_s"}-->" class="input-medium" />
+                <input type="submit" name="upload[flag_image_s]" value="アップロード" class="btn" />
+                </td>
+            </tr>
+            <tr>
+            	<th>フラグテキスト</th>
+                <td><input type="text" name="flag_text" id="flag_text" value="<!--{$flag->flag_text|input:"flag_text"}-->" class="input-medium" /></td>
+                <th>並び順</th>
+                <td><input type="text" name="sort_order" id="sort_order" value="<!--{$flag->sort_order|input:"sort_order"}-->" class="input-mini" /></td>
+            </tr>
+           	</table>
+			<div class="form_actions">
+			<input type="submit" name="save" id="save" class="btn btn-primary" value="登録する" />
+			<!--{if $flag->flag_id > 0}-->
+			<input type="button" name="delete" id="delete" class="btn btn-danger" value="フラグを削除する" onclick="if(confirm('削除します。よろしいですか？')){ location.href = 'delete.html?delete=1&flag_id=<!--{$flag->flag_id}-->'; }" />
+			<!--{/if}-->
+			</div>
+            </form>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+	<hr>
+	<!--{include file="admin/common/footer.html"}-->
 </div>
-<div class="content-primary">
-<form action="../../../admin/contents/flag/<!--{base}--><!--{$function_home}--><!--{$function_page}-->" method="POST" enctype="multipart/form-data" data-ajax="false">
-<input type="hidden" name="flag" value="<!--{$smarty.post.flag_id|default:$ATTRIBUTES.flag->flag_id}-->" />
-<ul data-role="listview" data-inset="true">
-	<li data-role="list-divider"><!--{$function_name}-->情報</li>
-	<li data-role="fieldcontain">
-	<label for="sort_order">表示順</label>
-	<input type="text" name="sort_order" id="sort_order" data-mini="true" value="<!--{$smarty.post.sort_order|default:$ATTRIBUTES.flag->sort_order}-->" />
-	</li>
-	<li data-role="fieldcontain">
-	<label for="flag_text">フラグテキスト</label>
-	<input type="text" name="flag_text" id="flag_text" data-mini="true" value="<!--{$smarty.post.flag_text|default:$ATTRIBUTES.flag->flag_text}-->" />
-	</li>
-	<!--{assign var="image_titles" value=","|explode:"フラグアイコン,フラグ画像"}-->
-	<!--{assign var="image_names" value=","|explode:"flag_image_s,flag_image"}-->
-	<!--{foreach from=$image_names key="index" item="image_name"}-->
-	<!--{assign var="image_title" value=$image_titles[$index]}--> 
-	<li data-role="list-divider"><!--{$image_title}--></li>
-	<li data-role="fieldcontain">
-	<!--{if $smarty.post[$image_name] != "" || $ATTRIBUTES.flag->$image_name != ""}-->
-	<p class="ui-li-desc"><img src="<!--{$smarty.post[$image_name]|default:$ATTRIBUTES.flag->$image_name}-->"></p>
-	<!--{/if}-->
-	<input type="hidden" name="<!--{$image_name}-->" value="<!--{$smarty.post[$image_name]|default:$ATTRIBUTES.flag->$image_name}-->" />
-	<input type="file" name="<!--{$image_name}-->" id="image_<!--{$image_name}-->" />
-	<input type="submit" name="upload[<!--{$image_name}-->]" id="upload_image_<!--{$image_name}-->" value="アップロード" />
-	</li>
-	<!--{/foreach}-->
-	<li data-role="fieldcontain"><div data-role="controlgroup" data-type="horizontal">
-	<input type="submit" name="add" id="add" value="登録内容を確認する" onClick="this.form.action = 'confirm.html'" />
-	<input type="button" name="delete" id="delete" value="<!--{$function_name}-->を削除する" onClick="if(confirm('削除します。よろしいですか？')){ location.href = 'index.html?delete=1&flag_id=<!--{$smarty.post.flag_id|default:$ATTRIBUTES.flag->flag_id}-->'; }" />
-	</div></li>
-</ul>
-</form>
-</div>       
-
-</div> 
-<div data-role="footer">
-<!--{include file="admin/common/footer.html"}-->
-</div> 
 </body>
 </html>
