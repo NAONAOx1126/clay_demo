@@ -25,10 +25,13 @@
 			<input type="hidden" name="customer_id" value="<!--{$ATTRIBUTES.customer->customer_id|input:"customer_id"}-->" />
 			<table class="table table-bordered" summary="登録">
 				<tr>
+					<th>メールアドレス</th>
+					<td colspan="3"><input type="text" class="input-long" name="email" id="email" value="<!--{$ATTRIBUTES.customer->email|input:"email"}-->" /></td>
+				</tr><tr>
+					<th>パスワード</th>
+					<td><input type="text" class="input-medium" name="password" id="password" value="<!--{$ATTRIBUTES.customer->password|input:"password"}-->" /></td>
 					<th>顧客コード</th>
 					<td><input type="text" class="input-medium" name="customer_code" id="customer_code" value="<!--{$ATTRIBUTES.customer->customer_code|input:"customer_code"}-->" /></td>
-					<th>端末ID</th>
-					<td><input type="text" class="input-medium" name="mobile_id" id="mobile_id" value="<!--{$ATTRIBUTES.customer->mobile_id|input:"mobile_id"}-->" /></td>
 				</tr><tr>
 					<th>顧客名</th>
 					<td>
@@ -41,8 +44,8 @@
 					<input type="text" class="input-medium" name="mei_kana" id="mei_kana" value="<!--{$ATTRIBUTES.customer->mei_kana|input:"mei_kana"}-->" />
 					</td>
 				</tr><tr>
-					<th>メールアドレス</th>
-					<td><input type="text" class="input-long" name="email" id="email" value="<!--{$ATTRIBUTES.customer->email|input:"email"}-->" /></td>
+					<th>端末ID</th>
+					<td><input type="text" class="input-medium" name="mobile_id" id="mobile_id" value="<!--{$ATTRIBUTES.customer->mobile_id|input:"mobile_id"}-->" /></td>
 					<th>外部ID</th>
 					<td><input type="text" class="input-medium" name="external_id" id="external_id" value="<!--{$ATTRIBUTES.customer->external_id|input:"external_id"}-->" /></td>
 				</tr><tr>
