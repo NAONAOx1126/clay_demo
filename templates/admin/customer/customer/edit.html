@@ -75,7 +75,9 @@
 			</table>
 			<div class="form_actions">
 			<input type="submit" name="add" id="add" class="btn btn-primary" value="登録内容を確認する" />
+			<!--{if $ATTRIBUTES.customer->customer_id > 0}-->
 			<input type="button" name="delete" id="delete" class="btn btn-danger" value="顧客を削除する" onclick="if(confirm('削除します。よろしいですか？')){ location.href = 'index.html?delete=1&product_id=<!--{$ATTRIBUTES.product->product_id}-->'; }" />
+			<!--{/if}-->
 			</div>
 			</form>
 		</div>
