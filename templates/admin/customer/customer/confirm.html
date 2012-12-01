@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
+<meta name="loadmodule" content="Base.Pages.ZipAddress" key="search_zip" redirect="edit.html" />
 <!--{include file="admin/common/header.html"}-->
 </head>
 <body>
@@ -22,31 +23,73 @@
 			<form class="well" action="complete.html" method="POST" enctype="multipart/form-data">
 			<table class="table table-bordered" summary="登録">
 				<tr>
-					<th>メールアドレス</th>
-					<td colspan="3"><!--{$smarty.post.email}--></td>
-				</tr><tr>
-					<th>パスワード</th>
-					<td><!--{$smarty.post.password}--></td>
+					<th>顧客ID</th>
+					<td><!--{$smarty.post.customer_id}--></td>
 					<th>顧客コード</th>
 					<td><!--{$smarty.post.customer_code}--></td>
 				</tr><tr>
 					<th>顧客名</th>
-					<td><!--{$smarty.post.sei}--> <!--{$smarty.post.mei}--></td>
+					<td>
+					<!--{$smarty.post.sei}--> <!--{$smarty.post.mei}-->
+					</td>
 					<th>顧客名カナ</th>
-					<td><!--{$smarty.post.sei_kana}--> <!--{$smarty.post.mei_kana}--></td>
+					<td>
+					<!--{$smarty.post.sei_kana}--> <!--{$smarty.post.mei_kana}-->
+					</td>
+				</tr><tr>
+					<th>メールアドレス</th>
+					<td colspan="3"><!--{$smarty.post.email}--></td>
+				</tr><tr>
+					<th>携帯メールアドレス</th>
+					<td colspan="3"><!--{$smarty.post.email_mobile}--></td>
+				</tr><tr>
+					<th>住所</th>
+					<td colspan="3">
+						〒<!--{$smarty.post.zip1}-->-<!--{$smarty.post.zip2}--><br />
+						<!--{assign var="selected_pref" value=$smarty.post.pref}-->
+						<!--{foreach from=$ATTRIBUTES.prefs item="pref"}-->
+						<!--{if $pref->id == $selected_pref}--><!--{$pref->name}--><!--{/if}-->
+						<!--{/foreach}-->
+						<!--{$smarty.post.address1}--><!--{$smarty.post.address2}-->
+					</td>
+				</tr><tr>
+					<th>電話番号</th>
+					<td>
+					<!--{$smarty.post.tel1}-->-<!--{$smarty.post.tel2}-->-<!--{$smarty.post.tel3}-->
+					</td>
+					<th>携帯電話番号</th>
+					<td>
+					<!--{$smarty.post.mobile1}-->-<!--{$smarty.post.mobile2}-->-<!--{$smarty.post.mobile3}-->
+					</td>
+				</tr><tr>
+					<th>パスワード</th>
+					<td><!--{$smarty.post.password}--></td>
+					<th>性別</th>
+					<td>
+						<!--{assign var="selected_sex" value=$smarty.post.sex}-->
+						<!--{if $selected_sex == "1"}-->男性<!--{/if}--><!--{if $selected_sex == "2"}-->女性<!--{/if}-->
+					</td>
+				</tr><tr>
+					<th>職業</th>
+					<td><!--{$smarty.post.job}--></td>
+					<th>ポイント</th>
+					<td><!--{$smarty.post.point|number_format}-->pt</td>
+				</tr><tr>
+					<th>秘密の質問</th>
+					<td><!--{$smarty.post.reminder}--></td>
+					<th>秘密の質問の答え</th>
+					<td><!--{$smarty.post.reminder_answer}--></td>
 				</tr><tr>
 					<th>端末ID</th>
 					<td><!--{$smarty.post.mobile_id}--></td>
 					<th>外部ID</th>
 					<td><!--{$smarty.post.external_id}--></td>
-				</tr><tr>
-					<th>電話番号</th>
-					<td><!--{$smarty.post.tel1}-->-<!--{$smarty.post.tel2}-->-<!--{$smarty.post.tel3}--></td>
-					<th>ポイント</th>
-					<td><!--{$smarty.post.point|default:0|number_format}-->pt</td>
 				</tr>
 			</table>
-			<div class="form_actions"><input type="submit" name="save" id="save" class="btn btn-primary" value="登録内容を確認する" /></div>
+			<div class="form_actions">
+			<a href="edit.html" class="btn">入力画面に戻る</a>
+			<input type="submit" name="save" id="save" class="btn btn-primary" value="登録内容を確認する" />
+			</div>
 			</form>
 		</div>
 		<!--/span-->

@@ -79,6 +79,7 @@
             </tr>
            	</table>
 			<div class="form_actions">
+			<a href="index.html" class="btn">一覧に戻る</a>
 			<input type="submit" name="save" id="save" class="btn btn-primary" value="登録する" />
 			<!--{if $category->category_id > 0}-->
 			<input type="button" name="delete" id="delete" class="btn btn-danger" value="カテゴリを削除する" onclick="if(confirm('削除します。よろしいですか？')){ location.href = 'delete.html?delete=1&category_id=<!--{$category->category_id}-->'; }" />

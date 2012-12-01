@@ -43,9 +43,9 @@
 					<th class="blue header">顧客コード</th>
 					<th class="blue header">顧客名</th>
 					<th class="blue header">メールアドレス</th>
-					<th class="blue header">端末ID</th>
-					<th class="blue header">外部ID</th>
+					<th class="blue header">住所</th>
 					<th class="blue header">電話番号</th>
+					<th class="blue header">ポイント</th>
 				</tr>
 				<!--{foreach from=$ATTRIBUTES.customers key="index" item="customer"}-->
 				<tr>
@@ -53,9 +53,12 @@
 					<td><!--{$customer->customer_code}--></td>
 					<td><!--{$customer->sei}--> <!--{$customer->mei}--></td>
 					<td><!--{$customer->email}--></td>
-					<td><!--{$customer->mobile_id}--></td>
-					<td><!--{$customer->external_id}--></td>
+					<td>
+						〒<!--{$customer->zip1}-->-<!--{$customer->zip2}--><br>
+						<!--{$customer->pref_name()}--><!--{$customer->address1}--><!--{$customer->address2}-->
+					</td>
 					<td><!--{$customer->tel1}--><!--{$customer->tel2}--><!--{$customer->tel3}--></td>
+					<td><!--{$customer->point|number_format}-->pt</td>
 				</tr>
 				<!--{/foreach}-->
 			</table>
