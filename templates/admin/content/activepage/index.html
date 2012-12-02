@@ -5,9 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><!--{$smarty.server.CONFIGURE->site_name}-->管理システム</title>
 <meta name="loadmodule" content="Base.Operator.Login" error="admin/login.html" />
-<meta name="loadmodule" content="Content.ActivePage.Delete" />
-<meta name="loadmodule" content="Content.ActivePage.Reset" />
-<meta name="loadmodule" content="Content.ActivePage.Page" clear="1" />
 <!--{include file="admin/common/header.html"}-->
 </head>
 <body>
@@ -22,23 +19,14 @@
 		</div>
 		<!--/span-->
 		<div class="span9"> 
-			<div><a href="edit.html" class="btn">新規登録</a></div>
-			<div id="pagelink"><!--{$ATTRIBUTES.active_pages_pager->getPageLink()}--><p class="total">全<!--{$ATTRIBUTES.active_pages_pager->getDataSize()|number_format}-->件</p></div>
 			<table class="table table-bordered table-striped" summary="一覧">
+				<form action="import.html" method="POST" enctype="multipart/form-data">
 				<tr>
-					<th class="blue header">詳細</th>
-					<th class="blue header">ショップID</th>
-					<th class="blue header">成果キー</th>
-					<th class="blue header">データインポート</th>
+					<td>ATM-CSV</td>
+					<td><input type="file" name="upload_file" class="input-large" /></td>
+					<td><input type="submit" class="btn" name="access_trade_mobile" value="インポート" /></td>
 				</tr>
-				<!--{foreach from=$ATTRIBUTES.active_pages key="index" item="active_page"}-->
-				<tr>
-					<td><a href="edit.html?active_page_key_id=<!--{$active_page->active_page_key_id}-->" class="btn">詳細</a></td>
-					<td><!--{$active_page->shop_id}--></td>
-					<td><!--{$active_page->link_key}--></td>
-					<td><a href="import.html?shop_id=<!--{$active_page->shop_id}-->" class="btn">インポート</a></td>
-				</tr>
-				<!--{/foreach}-->
+				</form>
 			</table>
 		</div>
 		<!--/span-->
